@@ -16,7 +16,7 @@ public class TransBot {
     private BulletManager bulletManager;
     
     public TransBot(int x, int y) {
-        this.transBotImg = new Obrazok("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/transBot/transBotJet.png");
+        this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
         this.x = x;
         this.y = y;
         this.transBotImg.zmenPolohu(x, y);
@@ -29,10 +29,10 @@ public class TransBot {
     private void updateTransBotImg() {
         if (zbran == 0 || zbran == 1) {
             this.transBotImg.skry();
-            this.transBotImg = new Obrazok("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/transBot/transBotJet.png");
+            this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
         } else {
             this.transBotImg.skry();
-            this.transBotImg = new Obrazok("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/transBot/transBot.png");
+            this.transBotImg = new Obrazok("src/pics/transBot/transBot.png");
         }
         this.transBotImg.zmenPolohu(this.x, this.y);
         this.transBotImg.zobraz();
@@ -41,16 +41,16 @@ public class TransBot {
         this.x += this.velX;
         this.y += this.velY;
 
-        if (this.y <= 50) {
-            this.y = 50;
+        if (this.y <= -20) {
+            this.y = -20;
         } else if (this.y >= 720) {
             this.y = 720;
         }
         
-        if (this.x <= 50) {
-            this.x = 50;
-        } else if (this.x >= 1390) {
-            this.x = 1390;
+        if (this.x <= 0) {
+            this.x = 0;
+        } else if (this.x >= 1320) {
+            this.x = 1320;
         }
         
         

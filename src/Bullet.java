@@ -17,8 +17,8 @@ public class Bullet {
     
     public Bullet(int x, int y, int aktualny) {
         this.aktualnyNaboj = aktualny;
-        this.nabojImg = new Obrazok("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/amo/" + this.getNazovNaboja() + ".png");
-        DataObrazku image = new DataObrazku("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/amo/" + this.getNazovNaboja() + ".png");
+        this.nabojImg = new Obrazok("src/pics/amo/" + this.getNazovNaboja() + ".png");
+        DataObrazku image = new DataObrazku("src/pics/amo/" + this.getNazovNaboja() + ".png");
         this.imageHeight = image.getVyska();
         this.imageWidth = image.getSirka();
         this.x = x;

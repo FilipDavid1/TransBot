@@ -15,7 +15,7 @@ public class Mapa {
         this.x = x;
         this.y = y;
         this.mapWidth = 1460;
-        this.mapaImg = new Obrazok("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/maps/robo.png");
+        this.mapaImg = new Obrazok("src/pics/maps/robo.png");
         this.mapaImg.zmenPolohu(x, y);
         this.mapaImg.zobraz();
     }

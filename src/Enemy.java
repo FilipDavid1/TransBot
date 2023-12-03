@@ -17,8 +17,8 @@ public class Enemy {
     private boolean movingRight;
     
     public Enemy(int x, int y) {
-        this.enemyImg = new Obrazok("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/enemy/psyball.png");
-        DataObrazku image = new DataObrazku("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/enemy/psyball.png");
+        this.enemyImg = new Obrazok("src/pics/enemy/psyball.png");
+        DataObrazku image = new DataObrazku("src/pics/enemy/psyball.png");
         this.imageHeight = image.getVyska();
         this.imageWidth = image.getSirka();
         this.x = x;
