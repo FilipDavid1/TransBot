@@ -1,5 +1,11 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-.idea
+.idea/
+
+# Ignore build artifacts
 out/
+target/
+
+# Ignore production files
+production/
