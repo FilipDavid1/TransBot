@@ -12,7 +12,7 @@ public class EnemySpawner {
     }
 
     private void spawnEnemies(int numberOfEnemies) {
-        int initialX = 50;
+        int initialX = 1000;
         int initialY = 100;
 
         for (int i = 0; i < numberOfEnemies; i++) {
@@ -21,7 +21,7 @@ public class EnemySpawner {
             manazer.spravujObjekt(enemy);
 
 
-            initialX += 150;
+            initialX += 100;
             initialY += 50;
         }
         System.out.println(this.enemies.size());
