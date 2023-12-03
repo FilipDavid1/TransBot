@@ -17,21 +17,27 @@ public class BulletManager {
         Bullet bullet = new Bullet(x, y, this.typNaboja);
         this.manazer.spravujObjekt(bullet);
         this.naboje.add(bullet);
-        vymazNabojPoX(1450);
+        vymazNabojPoX();
     }
 
-    private void vymazNabojPoX(int x) {
-        Iterator<Bullet> iterator = naboje.iterator();
-        while (iterator.hasNext()) {
-            Bullet bullet = iterator.next();
-            if (bullet.getX() >= x) {
+    private void vymazNabojPoX() {
+        ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
+        for (Bullet bullet : this.naboje) {
+            if (this.detectBullet(bullet, 1450)) {
+                bulletsToRemove.add(bullet);
                 bullet.skryObrazok();
                 manazer.prestanSpravovatObjekt(bullet);
-                iterator.remove();
             }
         }
+        this.naboje.removeAll(bulletsToRemove);
     }
 
+    private boolean detectBullet(Bullet bullet, int x) {
+        if (bullet.getX() >= x) {
+            return true;
+        }
+        return false;
+    }
 
     public void zmenNaboje() {
         this.typNaboja++;
