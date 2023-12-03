@@ -13,3 +13,5 @@ production/
 out/production/TransBotInteliJ/
 
 TransBotInteliJ.iml
+
+.DS_Store
