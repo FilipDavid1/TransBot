@@ -3,7 +3,7 @@ import java.util.Iterator;
 import fri.shapesge.Manazer;
 
 public class BulletManager {
-    private ArrayList<Naboj> naboje;
+    private ArrayList<Bullet> naboje;
     private Manazer manazer;
 
     private int typNaboja;
@@ -14,19 +14,19 @@ public class BulletManager {
     }
 
     public void vystrel(int x, int y) {
-        Naboj naboj = new Naboj(x, y, this.typNaboja);
-        this.manazer.spravujObjekt(naboj);
-        this.naboje.add(naboj);
+        Bullet bullet = new Bullet(x, y, this.typNaboja);
+        this.manazer.spravujObjekt(bullet);
+        this.naboje.add(bullet);
         vymazNabojPoX(1450);
     }
 
     private void vymazNabojPoX(int x) {
-        Iterator<Naboj> iterator = naboje.iterator();
+        Iterator<Bullet> iterator = naboje.iterator();
         while (iterator.hasNext()) {
-            Naboj naboj = iterator.next();
-            if (naboj.getX() >= x) {
-                naboj.skryObrazok();
-                manazer.prestanSpravovatObjekt(naboj);
+            Bullet bullet = iterator.next();
+            if (bullet.getX() >= x) {
+                bullet.skryObrazok();
+                manazer.prestanSpravovatObjekt(bullet);
                 iterator.remove();
             }
         }
@@ -40,5 +40,7 @@ public class BulletManager {
         }
     }
 
-
+    public ArrayList<Bullet> getNaboje() {
+        return naboje;
+    }
 }

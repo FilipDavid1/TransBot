@@ -24,14 +24,13 @@ public class EnemySpawner {
             initialX += 150;
             initialY += 50;
         }
+        System.out.println(this.enemies.size());
     }
 
     public ArrayList<Enemy> getNepriatelov() {
+        //System.out.println(this.enemies.size());
         return this.enemies;
     }
 
-    public void zmazNepriatela(Enemy enemy) {
-        this.enemies.remove(enemy);
-    }
 
 }

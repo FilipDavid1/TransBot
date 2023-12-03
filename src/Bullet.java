@@ -1,3 +1,4 @@
+import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
 /**
  * Write a description of class Naboj here.
@@ -5,15 +6,21 @@ import fri.shapesge.Obrazok;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Naboj {
+public class Bullet {
     private Obrazok nabojImg;
     private int x;
     private int y;
+
+    private int imageWidth;
+    private int imageHeight;
     private int aktualnyNaboj;
     
-    public Naboj(int x, int y, int aktualny) {
+    public Bullet(int x, int y, int aktualny) {
         this.aktualnyNaboj = aktualny;
         this.nabojImg = new Obrazok("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/amo/" + this.getNazovNaboja() + ".png");
+        DataObrazku image = new DataObrazku("/Users/filipdavid/Documents/INF/TransBotInteliJ/src/pics/amo/" + this.getNazovNaboja() + ".png");
+        this.imageHeight = image.getVyska();
+        this.imageWidth = image.getSirka();
         this.x = x;
         this.y = y;
         this.nabojImg.zmenPolohu(x, y);
@@ -63,5 +70,11 @@ public class Naboj {
         }
     }
 
+    public int getImageWidth() {
+        return imageWidth / 2;
+    }
 
+    public int getImageHeight() {
+        return imageHeight / 2;
+    }
 }

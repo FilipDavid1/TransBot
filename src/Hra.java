@@ -12,6 +12,8 @@ public class Hra {
     private Mapa mapa;
     private Mapa mapa2;
 
+    private CollisionDetectSystem collisionDetectSystem;
+
 
     
     public Hra() {
@@ -22,8 +24,12 @@ public class Hra {
         this.manazer.spravujObjekt(this.mapa);
         this.manazer.spravujObjekt(this.mapa2);
         this.enemySpawner = new EnemySpawner(this.manazer);
-
         this.manazer.spravujObjekt(this.bot);
+
+        this.collisionDetectSystem = new CollisionDetectSystem(this.enemySpawner.getNepriatelov(), this.bot.getBulletManager().getNaboje());
+        this.manazer.spravujObjekt(this.collisionDetectSystem);
+        System.out.println("haha");
+
     }
 
 
