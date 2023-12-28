@@ -1,3 +1,4 @@
+import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
 /**
  * Write a description of class TransBot here.
@@ -14,6 +15,11 @@ public class TransBot {
     private int zbran;
 
     private BulletManager bulletManager;
+
+    private int imageWidth;
+    private int imageHeight;
+
+    private DataObrazku dataObrazku;
     
     public TransBot(int x, int y) {
         this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
@@ -23,6 +29,9 @@ public class TransBot {
         this.transBotImg.zobraz();
         this.zbran = 0;
         this.bulletManager = new BulletManager();
+        this.dataObrazku = new DataObrazku("src/pics/transBot/transBotJet.png");
+        this.imageHeight = dataObrazku.getVyska();
+        this.imageWidth = dataObrazku.getSirka();
     }
 
 
@@ -30,9 +39,15 @@ public class TransBot {
         if (zbran == 0 || zbran == 1) {
             this.transBotImg.skry();
             this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
+            this.dataObrazku = new DataObrazku("src/pics/transBot/transBotJet.png");
+            this.imageHeight = dataObrazku.getVyska();
+            this.imageWidth = dataObrazku.getSirka();
         } else {
             this.transBotImg.skry();
             this.transBotImg = new Obrazok("src/pics/transBot/transBot.png");
+            this.dataObrazku = new DataObrazku("src/pics/transBot/transBot.png");
+            this.imageHeight = dataObrazku.getVyska();
+            this.imageWidth = dataObrazku.getSirka();
         }
         this.transBotImg.zmenPolohu(this.x, this.y);
         this.transBotImg.zobraz();
@@ -114,5 +129,21 @@ public class TransBot {
         this.velY = velY;
     }
 
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public int getImageWidth() {
+        return this.imageWidth / 2;
+    }
+
+    public int getImageHeight() {
+        return this.imageHeight / 2;
+    }
 
 }

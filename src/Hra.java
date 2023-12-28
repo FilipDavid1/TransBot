@@ -26,9 +26,9 @@ public class Hra {
         this.enemySpawner = new EnemySpawner(this.manazer);
         this.manazer.spravujObjekt(this.bot);
 
-        this.collisionDetectSystem = new CollisionDetectSystem(this.enemySpawner.getNepriatelov(), this.bot.getBulletManager().getNaboje());
+        this.collisionDetectSystem = new CollisionDetectSystem(this.enemySpawner.getNepriatelov(), this.bot.getBulletManager().getNaboje(), this.bot);
         this.manazer.spravujObjekt(this.collisionDetectSystem);
-        System.out.println("haha");
+        this.manazer.spravujObjekt(this.enemySpawner);
 
     }
 
