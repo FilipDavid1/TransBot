@@ -1,7 +1,8 @@
+import java.util.Random;
+
 public enum EnemyType {
     ALAPOT,
     ASCULE,
-    BARRIER,
     BIFLER,
     BOASITE,
     BOSS,
@@ -19,8 +20,6 @@ public enum EnemyType {
                 return "alapot";
             case ASCULE:
                 return "ascule";
-            case BARRIER:
-                return "barrier";
             case BIFLER:
                 return "bifler";
             case BOASITE:
@@ -43,6 +42,36 @@ public enum EnemyType {
                 return "zelnuc";
             default:
                 return "psyball";
+        }
+    }
+
+    public static EnemyType getRandomEnemyType() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(11);
+        //without boss
+        switch (randomNumber) {
+            case 0:
+                return EnemyType.ASCULE;
+            case 1:
+                return EnemyType.BIFLER;
+            case 2:
+                return EnemyType.BOASITE;
+            case 3:
+                return EnemyType.ELBLINK;
+            case 4:
+                return EnemyType.GEALMEA;
+            case 5:
+                return EnemyType.GELPAAR;
+            case 6:
+                return EnemyType.HILUN;
+            case 7:
+                return EnemyType.LUVOGUE;
+            case 8:
+                return EnemyType.PSYBALL;
+            case 9:
+                return EnemyType.ZELNUC;
+            default:
+                return EnemyType.PSYBALL;
         }
     }
 }
