@@ -1,14 +1,18 @@
 import java.util.ArrayList;
+import java.util.Random;
+
 import fri.shapesge.Manazer;
 
 public class EnemySpawner {
     private ArrayList<Enemy> enemies;
     private Manazer manazer;
 
+    private int time;
+
     public EnemySpawner(Manazer manazer) {
         this.enemies = new ArrayList<>();
         this.manazer = manazer;
-        spawnEnemies(5);
+        this.time = 50;
     }
 
 
@@ -25,14 +29,21 @@ public class EnemySpawner {
             initialX += 100;
             initialY += 50;
         }
-        System.out.println(this.enemies.size());
+    }
+
+    //spawn one enemy at random y and 1400 x
+    private void spawnEnemy() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(900);
+        Enemy enemy = new Enemy(1400, randomNumber, EnemyType.LUVOGUE);
+        enemies.add(enemy);
+        manazer.spravujObjekt(enemy);
     }
 
 
 
 
     public ArrayList<Enemy> getNepriatelov() {
-        //System.out.println(this.enemies.size());
         return this.enemies;
     }
 
@@ -40,8 +51,15 @@ public class EnemySpawner {
 
 
     public void tik() {
-        if (this.enemies.size() == 0) {
-            spawnEnemies(5);
+        if (this.time == 0) {
+            //spawn random number of enemies
+            Random random = new Random();
+            int randomNumber = random.nextInt(10) + 1;
+           // spawnEnemies(randomNumber);
+            this.spawnEnemy();
+            this.time = 50;
+        } else {
+            this.time--;
         }
     }
 
