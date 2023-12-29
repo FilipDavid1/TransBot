@@ -23,15 +23,19 @@ public class Hra {
         this.mapa2 = new Mapa(1620 , 800);
         this.manazer.spravujObjekt(this.mapa);
         this.manazer.spravujObjekt(this.mapa2);
-        this.enemySpawner = new EnemySpawner(this.manazer);
+        this.enemySpawner = new EnemySpawner(this.manazer, this.bot);
         this.manazer.spravujObjekt(this.bot);
 
         this.collisionDetectSystem = new CollisionDetectSystem(this.enemySpawner.getNepriatelov(), this.bot.getBulletManager().getBullets(), this.bot);
         this.manazer.spravujObjekt(this.collisionDetectSystem);
         this.manazer.spravujObjekt(this.enemySpawner);
-
+        this.manazer.spravujObjekt(this);
     }
 
+
+    public void endGame() {
+        System.exit(0);
+    }
 
     
 }
