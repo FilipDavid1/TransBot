@@ -97,9 +97,9 @@ public class TransBot {
 
     public void aktivuj() {
         if (this.zbran >= 2) {
-            this.bulletManager.vystrel(this.x + 35, this.y - 20);
+            this.bulletManager.shoot(this.x + 35, this.y - 20);
         } else {
-            this.bulletManager.vystrel(this.x + 50, this.y + 10);
+            this.bulletManager.shoot(this.x + 50, this.y + 10);
         }
     }
 

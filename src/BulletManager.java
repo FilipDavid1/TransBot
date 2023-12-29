@@ -1,35 +1,35 @@
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import fri.shapesge.Manazer;
 
 public class BulletManager {
-    private ArrayList<Bullet> naboje;
+    private ArrayList<Bullet> bullets;
     private Manazer manazer;
 
-    private int typNaboja;
+    private int bulletType;
     public BulletManager() {
-        this.naboje = new ArrayList<>();
+        this.bullets = new ArrayList<>();
         this.manazer = new Manazer();
-        this.typNaboja = 0;
+        this.bulletType = 0;
     }
 
-    public void vystrel(int x, int y) {
-        Bullet bullet = new Bullet(x, y, this.typNaboja);
+    public void shoot(int x, int y) {
+        Bullet bullet = new Bullet(x, y, this.bulletType);
         this.manazer.spravujObjekt(bullet);
-        this.naboje.add(bullet);
-        vymazNabojPoX();
+        this.bullets.add(bullet);
+        deleteBulletAfterX();
     }
 
-    private void vymazNabojPoX() {
+    private void deleteBulletAfterX() {
         ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
-        for (Bullet bullet : this.naboje) {
+        for (Bullet bullet : this.bullets) {
             if (this.detectBullet(bullet, 1450)) {
                 bulletsToRemove.add(bullet);
                 bullet.skryObrazok();
                 manazer.prestanSpravovatObjekt(bullet);
             }
         }
-        this.naboje.removeAll(bulletsToRemove);
+        this.bullets.removeAll(bulletsToRemove);
     }
 
     private boolean detectBullet(Bullet bullet, int x) {
@@ -40,13 +40,13 @@ public class BulletManager {
     }
 
     public void zmenNaboje() {
-        this.typNaboja++;
-        if (this.typNaboja > 4) {
-            this.typNaboja = 0;
+        this.bulletType++;
+        if (this.bulletType > 4) {
+            this.bulletType = 0;
         }
     }
 
-    public ArrayList<Bullet> getNaboje() {
-        return naboje;
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
     }
 }
