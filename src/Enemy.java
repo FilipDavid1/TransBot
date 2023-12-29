@@ -22,6 +22,8 @@ public class Enemy {
     private int randomNumber;
 
     private int angle;
+
+    private BulletManager bulletManager;
     
     public Enemy(int x, int y, EnemyType type) {
         this.type = type;
@@ -35,8 +37,9 @@ public class Enemy {
         this.enemyImg.zobraz();
         this.movingDown = false;
         Random random = new Random();
-        this.randomNumber = random.nextInt(800);
+        this.randomNumber = random.nextInt(800) + 1;
         this.angle = 0;
+        this.bulletManager = new BulletManager();
     }
 
 
@@ -48,12 +51,16 @@ public class Enemy {
             this.moveLeft();
             this.moveDown();
             this.moveUp();
-        } else if (this.type == EnemyType.BIFLER) {
-            this.moveLeft();
-        } else if (this.type == EnemyType.ELBLINK) {
+        }  else if (this.type == EnemyType.ELBLINK) {
             this.elblinkMovement();
         } else if (this.type == EnemyType.LUVOGUE) {
             this.luvoqueMovement();
+        } else if (this.type == EnemyType.BIFLER) {
+            this.biflerMovement();
+        } else if (this.type == EnemyType.HILUN) {
+            this.hilunMovement();
+        } else if (this.type == EnemyType.ALAPOT) {
+            this.alapotMovement();
         }
     }
 
@@ -118,6 +125,38 @@ public class Enemy {
         this.y -= 2;
     }
 
+    public void biflerMovement() {
+        //fly in from right to left with random speed
+
+        this.enemyImg.posunVodorovne(-this.randomNumber / 50 ) ;
+        this.x -= this.randomNumber / 50;
+
+    }
+
+    public void hilunMovement() {
+        //fly from right to left with random speed and rotate image
+        this.enemyImg.posunVodorovne(-this.randomNumber / 40 ) ;
+        this.x -= this.randomNumber / 40;
+
+        this.enemyImg.zmenUhol(angle);
+        angle += 10;
+
+    }
+
+    public void alapotMovement() {
+        //random rotation - 0 or 180 degrees after random time send to top or bottom of screen depending on rotation
+        this.enemyImg.posunVodorovne(-10) ;
+        this.x -= 10;
+        if (this.y <= 449) {
+            this.enemyImg.zmenUhol(180);
+            //this.enemyImg.posunZvisle(800);
+            //this.y += 800;
+        } else {
+            this.enemyImg.zmenUhol(0);
+            //this.enemyImg.posunZvisle(-800);
+            //this.y -= 800;
+        }
+    }
 
     public int getImageWidth() {
         return imageWidth / 2;
