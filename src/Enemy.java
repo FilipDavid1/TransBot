@@ -23,9 +23,13 @@ public class Enemy {
 
     private int angle;
 
-    private BulletManager bulletManager;
+    private TransBot bot;
+
+    private boolean hasReachedBot;
+
+    //private BulletManager bulletManager;
     
-    public Enemy(int x, int y, EnemyType type) {
+    public Enemy(int x, int y, EnemyType type, TransBot bot) {
         this.type = type;
         this.enemyImg = new Obrazok("src/pics/enemy/" + this.type.getEnemyImg() + ".png");
         DataObrazku image = new DataObrazku("src/pics/enemy/" + this.type.getEnemyImg() + ".png");
@@ -39,7 +43,9 @@ public class Enemy {
         Random random = new Random();
         this.randomNumber = random.nextInt(800) + 1;
         this.angle = 0;
-        this.bulletManager = new BulletManager();
+        //this.bulletManager = new BulletManager();
+        this.bot = bot;
+        this.hasReachedBot = false;
     }
 
 
@@ -48,9 +54,7 @@ public class Enemy {
 
     public void tik() {
         if (this.type == EnemyType.PSYBALL || this.type == EnemyType.ASCULE) {
-            this.moveLeft();
-            this.moveDown();
-            this.moveUp();
+            this.psyballMovement();
         }  else if (this.type == EnemyType.ELBLINK) {
             this.elblinkMovement();
         } else if (this.type == EnemyType.LUVOGUE) {
@@ -61,58 +65,54 @@ public class Enemy {
             this.hilunMovement();
         } else if (this.type == EnemyType.ALAPOT) {
             this.alapotMovement();
+        } else if (this.type == EnemyType.ZELNUC) {
+            this.zelnucMovement();
+        } else if (this.type == EnemyType.GELPAAR) {
+            this.gelpaarMovement();
         }
     }
 
-    private void moveDown() {
-        if (this.y < 500 && this.movingDown) {
-            this.enemyImg.posunZvisle(10);
-            this.y += 10;
+    private void psyballMovement() {
+        //move in sine wave between y 0 and 900
+        this.enemyImg.posunVodorovne(-10);
+        this.x -= 10;
 
-        } else {
-            this.movingDown = false;
-        }
-    }
+        this.enemyImg.posunZvisle((int)(Math.sin(this.x * 0.01) * 15));
+        this.y += (int)(Math.sin(this.x * 0.01) * 15);
 
-    private void moveUp() {
-        if (this.y >= 100 && !this.movingDown) {
-            this.enemyImg.posunZvisle(-10);
-            this.y -= 10;
 
-        } else {
-            this.movingDown = true;
-        }
-    }
-
-    private void moveLeft() {
-        this.enemyImg.posunVodorovne(-5);
-        this.x -= 5;
-        if (this.x <= -30) {
-            this.x = 1440;
-            this.enemyImg.zmenPolohu(this.x, this.y);
-        }
     }
 
     private void elblinkMovement() {
-        //move enemy left until it reaches x that is same as random x then move quickly up or down
-        if (this.x > this.randomNumber) {
-            this.moveLeft();
+        //move enemy left the moment this.x is more than this.bot.getX() set hasReachedBot to true and only move down or up depending on this.y
+
+        if (this.x > this.bot.getX()) {
+            this.enemyImg.posunVodorovne(-10);
+            this.x -= 10;
         } else {
+            this.hasReachedBot = true;
+        }
+
+        //send enemy one way randomly
+        if (this.hasReachedBot) {
             if (this.y < 800 && this.movingDown) {
-                this.enemyImg.posunZvisle(20);
-                this.y += 20;
+                this.enemyImg.posunZvisle(15);
+                this.y += 15;
 
             } else {
                 this.movingDown = false;
             }
-            if (this.y >= 0 && !this.movingDown) {
-                this.enemyImg.posunZvisle(-20);
-                this.y -= 20;
+
+            if (this.y >= 10 && !this.movingDown) {
+                this.enemyImg.posunZvisle(-15);
+                this.y -= 15;
 
             } else {
                 this.movingDown = true;
             }
         }
+
+
     }
 
     private void luvoqueMovement() {
@@ -134,12 +134,20 @@ public class Enemy {
     }
 
     public void hilunMovement() {
-        //fly from right to left with random speed and rotate image
+        //fly with random speed and rotate image and go after bot
         this.enemyImg.posunVodorovne(-this.randomNumber / 40 ) ;
         this.x -= this.randomNumber / 40;
 
         this.enemyImg.zmenUhol(angle);
         angle += 10;
+
+        if (this.y < this.bot.getY()) {
+            this.enemyImg.posunZvisle(5);
+            this.y += 5;
+        } else if (this.y > this.bot.getY()) {
+            this.enemyImg.posunZvisle(-5);
+            this.y -= 5;
+        }
 
     }
 
@@ -157,6 +165,57 @@ public class Enemy {
             //this.y -= 800;
         }
     }
+
+
+    public void zelnucMovement() {
+        //fly from right to left and after reaching random x send diagonally to right and down or right and up
+
+        this.enemyImg.posunVodorovne(-this.randomNumber / 50 ) ;
+        this.x -= this.randomNumber / 50;
+
+        if (this.x <= 1000) {
+            if (this.y < 700 && this.movingDown) {
+                this.enemyImg.posunZvisle(15);
+                this.y += 15;
+                //rotate image
+                this.enemyImg.zmenUhol(-45);
+
+            } else {
+                this.movingDown = false;
+            }
+
+            if (this.y >= 100 && !this.movingDown) {
+                this.enemyImg.posunZvisle(-15);
+                this.y -= 15;
+                //rotate image
+                this.enemyImg.zmenUhol(45);
+
+            } else {
+                this.movingDown = true;
+            }
+        }
+    }
+
+    public void gelpaarMovement() {
+        int centerX = this.x;
+        int centerY = this.y;
+
+        int radius = 100;
+
+        double angularSpeed = 0.02;
+
+        this.enemyImg.posunVodorovne(-5);
+        this.x -= 5;
+
+
+        double angleCircle = this.x * angularSpeed;
+        int newX = ( int )(centerX + radius * Math.cos(angleCircle));
+        int newY = ( int )(centerY + radius * Math.sin(angleCircle));
+
+        this.enemyImg.zmenPolohu(newX, newY);
+    }
+
+
 
     public int getImageWidth() {
         return imageWidth / 2;
@@ -176,6 +235,11 @@ public class Enemy {
 
     public void skryObrazok() {
         this.enemyImg.skry();
+    }
+
+
+    public void zmenObrazok(String path) {
+        this.enemyImg.zmenObrazok(path);
     }
 
 }
