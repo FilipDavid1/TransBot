@@ -24,10 +24,27 @@ public class CollisionDetectSystem {
             }
             for (Bullet bullet : this.bullets) {
                 if (this.detectCollision(enemy, bullet)) {
-                    enemiesToRemove.add(enemy);
-                    bulletsToRemove.add(bullet);
-                    enemy.skryObrazok();
-                    bullet.skryObrazok();
+                    //if enemy type is gealmea move her 50 px right
+                    if (enemy.getType() == EnemyType.GEALMEA) {
+                        //if enemy health is 1, remove her
+                        if (enemy.getHealth() == 1) {
+                            enemiesToRemove.add(enemy);
+                            enemy.skryObrazok();
+                            bulletsToRemove.add(bullet);
+                            bullet.skryObrazok();
+                        } else {
+                            enemy.setHealth(enemy.getHealth() - 1);
+                            enemy.setX(enemy.getX() + 100);
+                            bulletsToRemove.add(bullet);
+                            bullet.skryObrazok();
+                        }
+
+                    } else {
+                        enemiesToRemove.add(enemy);
+                        bulletsToRemove.add(bullet);
+                        enemy.skryObrazok();
+                        bullet.skryObrazok();
+                    }
                 }
             }
         }
