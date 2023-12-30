@@ -79,8 +79,8 @@ public class Enemy {
         this.enemyImg.posunVodorovne(-10);
         this.x -= 10;
 
-        this.enemyImg.posunZvisle((int)(Math.sin(this.x * 0.01) * 15));
-        this.y += (int)(Math.sin(this.x * 0.01) * 15);
+        this.enemyImg.posunZvisle((int)(Math.cos(this.x * 0.005) * 11));
+        this.y += (int)(Math.cos(this.x * 0.005) * 11);
 
 
     }

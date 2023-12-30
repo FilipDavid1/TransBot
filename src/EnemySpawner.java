@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-
 import fri.shapesge.Manazer;
 
 public class EnemySpawner {
@@ -19,18 +18,18 @@ public class EnemySpawner {
     }
 
 
-    private void spawnPsyball(int numberOfEnemies) {
+    private void spawnPsyball(int numberOfEnemies, EnemyType enemyType) {
         int initialX = 1400;
-        int initialY = 100;
+        int initialY = 250;
 
         for (int i = 0; i < numberOfEnemies; i++) {
-            Enemy enemy = new Enemy(initialX, initialY, EnemyType.PSYBALL, this.bot);
+            Enemy enemy = new Enemy(initialX, initialY, enemyType, this.bot);
             enemies.add(enemy);
             manazer.spravujObjekt(enemy);
 
 
             initialX += 100;
-            initialY += 50;
+            initialY -= 10;
         }
     }
 
@@ -53,9 +52,9 @@ public class EnemySpawner {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
         //get random enemy type and if it is psyball, spawn more than one
-        EnemyType enemyType = EnemyType.GEALMEA;
+        EnemyType enemyType = EnemyType.getRandomEnemyType();
         if (enemyType == EnemyType.PSYBALL || enemyType == EnemyType.ASCULE) {
-            this.spawnPsyball(6);
+            this.spawnPsyball(5, enemyType);
         } else if (enemyType == EnemyType.GEALMEA) {
             this.spawnGealmea();
         } else {
