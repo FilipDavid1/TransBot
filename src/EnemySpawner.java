@@ -19,34 +19,56 @@ public class EnemySpawner {
     }
 
 
-//    private void spawnEnemies(int numberOfEnemies) {
-//        int initialX = 1000;
-//        int initialY = 100;
-//
-//        for (int i = 0; i < numberOfEnemies; i++) {
-//            Enemy enemy = new Enemy(initialX, initialY, EnemyType.);
-//            enemies.add(enemy);
-//            manazer.spravujObjekt(enemy);
-//
-//
-//            initialX += 100;
-//            initialY += 50;
-//        }
-//    }
+    private void spawnPsyball(int numberOfEnemies) {
+        int initialX = 1400;
+        int initialY = 100;
+
+        for (int i = 0; i < numberOfEnemies; i++) {
+            Enemy enemy = new Enemy(initialX, initialY, EnemyType.PSYBALL, this.bot);
+            enemies.add(enemy);
+            manazer.spravujObjekt(enemy);
+
+
+            initialX += 100;
+            initialY += 50;
+        }
+    }
+
+    private void spawnGealmea() {
+        //spawn 6 gealmeas in a row with 100px distance
+        int initialX = 1400;
+        int initialY = 10;
+
+        for (int i = 0; i < 8; i++) {
+            Enemy enemy = new Enemy(initialX, initialY, EnemyType.GEALMEA, this.bot);
+            enemies.add(enemy);
+            manazer.spravujObjekt(enemy);
+
+            initialY += 100;
+        }
+    }
 
     //spawn one enemy at random y and 1400 x
     private void spawnEnemy() {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
-        Enemy enemy = new Enemy(1400, randomNumber, EnemyType.GELPAAR, this.bot);
-        enemies.add(enemy);
-        manazer.spravujObjekt(enemy);
+        //get random enemy type and if it is psyball, spawn more than one
+        EnemyType enemyType = EnemyType.GEALMEA;
+        if (enemyType == EnemyType.PSYBALL || enemyType == EnemyType.ASCULE) {
+            this.spawnPsyball(6);
+        } else if (enemyType == EnemyType.GEALMEA) {
+            this.spawnGealmea();
+        } else {
+            Enemy enemy = new Enemy(1400, randomNumber, enemyType, this.bot);
+            enemies.add(enemy);
+            manazer.spravujObjekt(enemy);
+        }
     }
 
 
 
 
-    public ArrayList<Enemy> getNepriatelov() {
+    public ArrayList<Enemy> getEnemies() {
         return this.enemies;
     }
 
