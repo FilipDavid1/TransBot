@@ -27,8 +27,7 @@ public class Enemy {
 
     private boolean hasReachedBot;
 
-    //private BulletManager bulletManager;
-    
+    private int health;
     public Enemy(int x, int y, EnemyType type, TransBot bot) {
         this.type = type;
         this.enemyImg = new Obrazok("src/pics/enemy/" + this.type.getEnemyImg() + ".png");
@@ -46,6 +45,7 @@ public class Enemy {
         //this.bulletManager = new BulletManager();
         this.bot = bot;
         this.hasReachedBot = false;
+        this.health = 3;
     }
 
 
@@ -69,6 +69,8 @@ public class Enemy {
             this.zelnucMovement();
         } else if (this.type == EnemyType.GELPAAR) {
             this.gelpaarMovement();
+        } else if (this.type == EnemyType.GEALMEA) {
+            this.gealmeaMovement();
         }
     }
 
@@ -215,6 +217,11 @@ public class Enemy {
         this.enemyImg.zmenPolohu(newX, newY);
     }
 
+    public void gealmeaMovement() {
+        //fly from right to left
+        this.enemyImg.posunVodorovne(-10) ;
+        this.x -= 10;
+    }
 
 
     public int getImageWidth() {
@@ -237,9 +244,20 @@ public class Enemy {
         this.enemyImg.skry();
     }
 
-
-    public void zmenObrazok(String path) {
-        this.enemyImg.zmenObrazok(path);
+    public EnemyType getType() {
+        return this.type;
     }
 
+    public void setX(int x) {
+        this.x = x;
+        this.enemyImg.zmenPolohu(this.x, this.y);
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getHealth() {
+        return this.health;
+    }
 }
