@@ -7,10 +7,13 @@ public class CollisionDetectSystem {
 
     private TransBot transBot;
 
-    public CollisionDetectSystem(ArrayList<Enemy> enemies, ArrayList<Bullet> bullets, TransBot transBot) {
+    private Score score;
+
+    public CollisionDetectSystem(ArrayList<Enemy> enemies, ArrayList<Bullet> bullets, TransBot transBot, Score score) {
         this.enemies = enemies;
         this.bullets = bullets;
         this.transBot = transBot;
+        this.score = score;
     }
 
     private void detectAndRemoveCollision() {
@@ -20,7 +23,7 @@ public class CollisionDetectSystem {
             if (this.detectCollision(enemy, this.transBot)) {
                 enemiesToRemove.add(enemy);
                 enemy.skryObrazok();
-                System.out.println("Kolizia");
+                this.transBot.getHealth().decreaseHealth();
             }
             for (Bullet bullet : this.bullets) {
                 if (this.detectCollision(enemy, bullet)) {
@@ -32,11 +35,13 @@ public class CollisionDetectSystem {
                             enemy.skryObrazok();
                             bulletsToRemove.add(bullet);
                             bullet.skryObrazok();
+                            this.score.increaseScore();
                         } else {
                             enemy.setHealth(enemy.getHealth() - 1);
                             enemy.setX(enemy.getX() + 100);
                             bulletsToRemove.add(bullet);
                             bullet.skryObrazok();
+
                         }
 
                     } else {
@@ -44,6 +49,7 @@ public class CollisionDetectSystem {
                         bulletsToRemove.add(bullet);
                         enemy.skryObrazok();
                         bullet.skryObrazok();
+                        this.score.increaseScore();
                     }
                 }
             }
