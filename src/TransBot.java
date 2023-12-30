@@ -12,7 +12,8 @@ public class TransBot {
     private int y;
     private int velX;
     private int velY;
-    private int zbran;
+
+    private BulletType bulletType;
 
     private BulletManager bulletManager;
 
@@ -20,6 +21,8 @@ public class TransBot {
     private int imageHeight;
 
     private DataObrazku dataObrazku;
+
+    private Health health;
     
     public TransBot(int x, int y) {
         this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
@@ -27,16 +30,18 @@ public class TransBot {
         this.y = y;
         this.transBotImg.zmenPolohu(x, y);
         this.transBotImg.zobraz();
-        this.zbran = 0;
-        this.bulletManager = new BulletManager();
+        this.bulletType = BulletType.NORMAL;
+        this.bulletManager = new BulletManager(this.bulletType);
         this.dataObrazku = new DataObrazku("src/pics/transBot/transBotJet.png");
         this.imageHeight = dataObrazku.getVyska();
         this.imageWidth = dataObrazku.getSirka();
+        this.health = new Health();
+
     }
 
 
     private void updateTransBotImg() {
-        if (zbran == 0 || zbran == 1) {
+        if (this.bulletType == BulletType.NORMAL || this.bulletType == BulletType.CANNON) {
             this.transBotImg.skry();
             this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
             this.dataObrazku = new DataObrazku("src/pics/transBot/transBotJet.png");
@@ -72,10 +77,10 @@ public class TransBot {
         this.transBotImg.zmenPolohu(this.x, this.y);
     }
 
-    private void pripocitajZbran() {
-        this.zbran++;
-        if (this.zbran > 4) {
-            this.zbran = 0;
+    private void changeBulletType() {
+        this.bulletType = BulletType.values()[this.bulletType.ordinal() + 1];
+        if (this.bulletType.ordinal() > 4) {
+            this.bulletType = BulletType.NORMAL;
         }
         this.updateTransBotImg();
     }
@@ -96,16 +101,16 @@ public class TransBot {
     }
 
     public void aktivuj() {
-        if (this.zbran >= 2) {
-            this.bulletManager.shoot(this.x + 35, this.y - 20);
+        if (this.bulletType == BulletType.NORMAL || this.bulletType == BulletType.CANNON) {
+            this.bulletManager.shoot(this.x + 35, this.y + 20);
         } else {
-            this.bulletManager.shoot(this.x + 50, this.y + 10);
+            this.bulletManager.shoot(this.x + 50, this.y - 25);
         }
     }
 
     public void zmenNaboj() {
-        this.bulletManager.zmenNaboje();
-        this.pripocitajZbran();
+        this.bulletManager.changeBulletType();
+        this.changeBulletType();
     }
     
     public void stopX() {
@@ -144,6 +149,10 @@ public class TransBot {
 
     public int getImageHeight() {
         return this.imageHeight / 2;
+    }
+
+    public Health getHealth() {
+        return this.health;
     }
 
 }

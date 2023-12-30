@@ -6,11 +6,11 @@ public class BulletManager {
     private ArrayList<Bullet> bullets;
     private Manazer manazer;
 
-    private int bulletType;
-    public BulletManager() {
+    private BulletType bulletType;
+    public BulletManager(BulletType bulletType) {
         this.bullets = new ArrayList<>();
         this.manazer = new Manazer();
-        this.bulletType = 0;
+        this.bulletType = bulletType;
     }
 
     public void shoot(int x, int y) {
@@ -39,10 +39,10 @@ public class BulletManager {
         return false;
     }
 
-    public void zmenNaboje() {
-        this.bulletType++;
-        if (this.bulletType > 4) {
-            this.bulletType = 0;
+    public void changeBulletType() {
+        this.bulletType = BulletType.values()[this.bulletType.ordinal() + 1];
+        if (this.bulletType.ordinal() > 4) {
+            this.bulletType = BulletType.NORMAL;
         }
     }
 

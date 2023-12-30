@@ -13,10 +13,10 @@ public class Bullet {
 
     private int imageWidth;
     private int imageHeight;
-    private int aktualnyNaboj;
+    private BulletType bulletType;
     
-    public Bullet(int x, int y, int aktualny) {
-        this.aktualnyNaboj = aktualny;
+    public Bullet(int x, int y, BulletType bulletType) {
+        this.bulletType = bulletType;
         this.nabojImg = new Obrazok("src/pics/amo/" + this.getNazovNaboja() + ".png");
         DataObrazku image = new DataObrazku("src/pics/amo/" + this.getNazovNaboja() + ".png");
         this.imageHeight = image.getVyska();
@@ -49,24 +49,17 @@ public class Bullet {
     }
     
     public String getNazovNaboja() {
-        switch (this.aktualnyNaboj) {
-            case 0:
-                return "normal";
-            
-            case 1:
+        switch (this.bulletType) {
+            case CANNON:
                 return "cannon";
-            
-            case 2:
+            case BEAM:
                 return "beam";
-                
-            case 3:
+            case SWORD_FIRE:
                 return "sword_fire";
-                
-            case 4:
+            case DIFFUSION_BEAM:
                 return "diffusion_beam";
-            
             default:
-                return String.valueOf(this.aktualnyNaboj);
+                return "normal";
         }
     }
 
