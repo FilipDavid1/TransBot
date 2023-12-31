@@ -3,10 +3,8 @@ public enum BulletType {
     CANNON,
     BEAM,
     SWORD_FIRE,
-    DIFFUSION_BEAM;
+    DIFFUSION_BEAM,
+    ENEMY_BULLET;
 
-    public BulletType getNext() {
-        return values()[(ordinal() + 1) % values().length];
-    }
 
 }
