@@ -2,7 +2,7 @@ public class Health {
     private int health;
 
     public Health() {
-        this.health = 100;
+        this.health = 250;
     }
 
     public void decreaseHealth() {

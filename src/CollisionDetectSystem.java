@@ -20,6 +20,16 @@ public class CollisionDetectSystem {
         ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
         ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
         for (Enemy enemy : this.enemies) {
+            if (enemy.getType() == EnemyType.HILUN) {
+                for (Bullet bullet : enemy.getBulletManager().getBullets()) {
+                    if (this.detectCollision(transBot, bullet)) {
+                        bulletsToRemove.add(bullet);
+                        bullet.skryObrazok();
+                        System.out.println("HIT");
+                        this.transBot.getHealth().decreaseHealth();
+                    }
+                }
+            }
             if (this.detectCollision(enemy, this.transBot)) {
                 enemiesToRemove.add(enemy);
                 enemy.skryObrazok();
@@ -28,7 +38,7 @@ public class CollisionDetectSystem {
             for (Bullet bullet : this.bullets) {
                 if (this.detectCollision(enemy, bullet)) {
                     //if enemy type is gealmea move her 50 px right
-                    if (enemy.getType() == EnemyType.GEALMEA) {
+                    if (enemy.getType() == EnemyType.GEALMEA && bullet.getBulletType() != BulletType.DIFFUSION_BEAM) {
                         //if enemy health is 1, remove her
                         if (enemy.getHealth() == 1) {
                             enemiesToRemove.add(enemy);
@@ -45,6 +55,7 @@ public class CollisionDetectSystem {
                         }
 
                     } else {
+                        enemy.setIsDead(true);
                         enemiesToRemove.add(enemy);
                         bulletsToRemove.add(bullet);
                         enemy.skryObrazok();
@@ -77,6 +88,24 @@ public class CollisionDetectSystem {
                 (enemyRight + 10) > bulletLeft &&
                 (enemyTop - 10) < bulletBottom &&
                 (enemyBottom + 10) > bulletTop;
+    }
+
+    private boolean detectCollision(TransBot bot, Bullet bullet) {
+        //detect collision between transbot and Hilun bullets - it shoots 4 bullets at once
+        int botLeft = bot.getX();
+        int botRight = bot.getX() + bot.getImageWidth();
+        int botTop = bot.getY();
+        int botBottom = bot.getY() + bot.getImageHeight();
+
+        int bulletLeft = bullet.getX();
+        int bulletRight = bullet.getX() + bullet.getImageWidth();
+        int bulletTop = bullet.getY();
+        int bulletBottom = bullet.getY() + bullet.getImageHeight();
+
+        return (botLeft - 10) < bulletRight &&
+                (botRight + 10) > bulletLeft &&
+                (botTop - 10) < bulletBottom &&
+                (botBottom + 10) > bulletTop;
     }
 
     private boolean detectCollision(Enemy enemy, TransBot transBot) {

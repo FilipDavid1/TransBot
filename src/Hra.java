@@ -30,9 +30,6 @@ public class Hra {
         this.enemySpawner = new EnemySpawner(this.manazer, this.bot);
         this.collisionDetectSystem = new CollisionDetectSystem(this.enemySpawner.getEnemies(), this.bot.getBulletManager().getBullets(), this.bot, this.score);
         this.manazer.spravujObjekt(this);
-    }
-
-    public void startGame() {
         this.manazer.spravujObjekt(this.mapa);
         this.manazer.spravujObjekt(this.mapa2);
         this.manazer.spravujObjekt(this.bot);
@@ -40,6 +37,8 @@ public class Hra {
         this.manazer.spravujObjekt(this.enemySpawner);
         this.manazer.spravujObjekt(this.gameInfo);
     }
+
+
 
     public void endGame() {
         System.exit(0);

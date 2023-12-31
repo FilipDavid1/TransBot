@@ -36,8 +36,6 @@ public enum EnemyType {
                 return "hilun";
             case LUVOGUE:
                 return "luvogue";
-            case PSYBALL:
-                return "psyball";
             case ZELNUC:
                 return "zelnuc";
             default:
@@ -66,8 +64,6 @@ public enum EnemyType {
                 return EnemyType.HILUN;
             case 7:
                 return EnemyType.LUVOGUE;
-            case 8:
-                return EnemyType.PSYBALL;
             case 9:
                 return EnemyType.ZELNUC;
             default:

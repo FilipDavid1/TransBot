@@ -52,7 +52,7 @@ public class EnemySpawner {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
         //get random enemy type and if it is psyball, spawn more than one
-        EnemyType enemyType = EnemyType.getRandomEnemyType();
+        EnemyType enemyType = EnemyType.GEALMEA;
         if (enemyType == EnemyType.PSYBALL || enemyType == EnemyType.ASCULE) {
             this.spawnPsyball(5, enemyType);
         } else if (enemyType == EnemyType.GEALMEA) {
@@ -92,6 +92,7 @@ public class EnemySpawner {
         ArrayList<Enemy> enemiesToDelete = new ArrayList<>();
         for (Enemy enemy : this.enemies) {
             if (enemy.getX() <= 0) {
+                enemy.setIsDead(true);
                 enemiesToDelete.add(enemy);
                 enemy.skryObrazok();
             }
