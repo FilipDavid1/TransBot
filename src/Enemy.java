@@ -28,6 +28,12 @@ public class Enemy {
     private boolean hasReachedBot;
 
     private int health;
+
+    private int timer;
+
+    private boolean isDead;
+
+    private BulletManager bulletManager;
     public Enemy(int x, int y, EnemyType type, TransBot bot) {
         this.type = type;
         this.enemyImg = new Obrazok("src/pics/enemy/" + this.type.getEnemyImg() + ".png");
@@ -46,6 +52,9 @@ public class Enemy {
         this.bot = bot;
         this.hasReachedBot = false;
         this.health = 3;
+        this.bulletManager = new BulletManager(BulletType.ENEMY_BULLET);
+        this.timer = 50;
+        this.isDead = false;
     }
 
 
@@ -139,9 +148,14 @@ public class Enemy {
         //fly with random speed and rotate image and go after bot
         this.enemyImg.posunVodorovne(-this.randomNumber / 40 ) ;
         this.x -= this.randomNumber / 40;
-
-        this.enemyImg.zmenUhol(angle);
-        angle += 10;
+        if (!this.isDead) {
+            if (this.timer == 0 && this.x > 0 ) {
+                this.bulletManager.shoot4directions(this.x - this.imageWidth / 2, this.y);
+                this.timer = 50;
+            } else {
+                this.timer--;
+            }
+        }
 
         if (this.y < this.bot.getY()) {
             this.enemyImg.posunZvisle(5);
@@ -259,5 +273,13 @@ public class Enemy {
 
     public int getHealth() {
         return this.health;
+    }
+
+    public BulletManager getBulletManager() {
+        return this.bulletManager;
+    }
+
+    public void setIsDead(boolean isDead) {
+        this.isDead = isDead;
     }
 }
