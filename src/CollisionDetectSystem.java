@@ -54,12 +54,17 @@ public class CollisionDetectSystem {
 
                         }
 
+                    } else if (bullet.getBulletType() == BulletType.DIFFUSION_BEAM) {
+                        enemy.setIsDead(true);
+                        enemiesToRemove.add(enemy);
+                        enemy.skryObrazok();
+                        this.score.increaseScore();
                     } else {
                         enemy.setIsDead(true);
                         enemiesToRemove.add(enemy);
                         bulletsToRemove.add(bullet);
-                        enemy.skryObrazok();
                         bullet.skryObrazok();
+                        enemy.skryObrazok();
                         this.score.increaseScore();
                     }
                 }
