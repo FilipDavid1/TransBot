@@ -52,7 +52,7 @@ public class EnemySpawner {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
         //get random enemy type and if it is psyball, spawn more than one
-        EnemyType enemyType = EnemyType.GEALMEA;
+        EnemyType enemyType = EnemyType.getRandomEnemyType();
         if (enemyType == EnemyType.PSYBALL || enemyType == EnemyType.ASCULE) {
             this.spawnPsyball(5, enemyType);
         } else if (enemyType == EnemyType.GEALMEA) {

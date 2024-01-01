@@ -150,7 +150,7 @@ public class Enemy {
         this.x -= this.randomNumber / 40;
         if (!this.isDead) {
             if (this.timer == 0 && this.x > 0 ) {
-                this.bulletManager.shoot4directions(this.x - this.imageWidth / 2, this.y);
+                this.bulletManager.shoot4Directions(this.x - this.imageWidth / 2, this.y);
                 this.timer = 50;
             } else {
                 this.timer--;
