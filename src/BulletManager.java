@@ -19,27 +19,67 @@ public class BulletManager {
         this.deleteBulletAfter();
     }
     public void shoot(int x, int y) {
-        Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
-        this.manazer.spravujObjekt(bullet);
-        this.bullets.add(bullet);
+        if (this.bullets.size() < 10) {
+            Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
+            this.manazer.spravujObjekt(bullet);
+            this.bullets.add(bullet);
+        }
     }
 
-    public void shoot4directions(int x, int y) {
-        Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
-        this.manazer.spravujObjekt(bullet);
-        this.bullets.add(bullet);
-        Bullet bullet2 = new Bullet(x, y, this.bulletType, BulletDirection.LEFT);
-        bullet2.zmenUhol(180);
-        this.manazer.spravujObjekt(bullet2);
-        this.bullets.add(bullet2);
-        Bullet bullet3 = new Bullet(x, y, this.bulletType, BulletDirection.UP);
-        bullet3.zmenUhol(270);
-        this.manazer.spravujObjekt(bullet3);
-        this.bullets.add(bullet3);
-        Bullet bullet4 = new Bullet(x, y, this.bulletType, BulletDirection.DOWN);
-        bullet4.zmenUhol(90);
-        this.manazer.spravujObjekt(bullet4);
-        this.bullets.add(bullet4);
+    public void burst(int x, int y) {
+        //reduce shoot cooldown
+        if (this.bullets.size() < 10) {
+            this.shoot(x, y);
+            this.shoot(x + 150, y);
+        }
+    }
+
+    public void shoot2Directions(int x, int y) {
+        if (this.bullets.size() < 10) {
+            Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
+            this.manazer.spravujObjekt(bullet);
+            this.bullets.add(bullet);
+            Bullet bullet2 = new Bullet(x, y, this.bulletType, BulletDirection.LEFT);
+            bullet2.zmenUhol(180);
+            this.manazer.spravujObjekt(bullet2);
+            this.bullets.add(bullet2);
+        }
+    }
+
+    public void shoot4Directions(int x, int y) {
+        if (this.bullets.size() < 10) {
+            Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
+            this.manazer.spravujObjekt(bullet);
+            this.bullets.add(bullet);
+            Bullet bullet2 = new Bullet(x, y, this.bulletType, BulletDirection.LEFT);
+            bullet2.zmenUhol(180);
+            this.manazer.spravujObjekt(bullet2);
+            this.bullets.add(bullet2);
+            Bullet bullet3 = new Bullet(x, y, this.bulletType, BulletDirection.UP);
+            bullet3.zmenUhol(-90);
+            this.manazer.spravujObjekt(bullet3);
+            this.bullets.add(bullet3);
+            Bullet bullet4 = new Bullet(x, y, this.bulletType, BulletDirection.DOWN);
+            bullet4.zmenUhol(90);
+            this.manazer.spravujObjekt(bullet4);
+            this.bullets.add(bullet4);
+        }
+    }
+
+    public void shoot3Directions(int x, int y) {
+        if (this.bullets.size() < 10) {
+            Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
+            this.manazer.spravujObjekt(bullet);
+            this.bullets.add(bullet);
+            Bullet bullet2 = new Bullet(x, y, this.bulletType, BulletDirection.UP_RIGHT);
+            bullet2.zmenUhol(-45);
+            this.manazer.spravujObjekt(bullet2);
+            this.bullets.add(bullet2);
+            Bullet bullet3 = new Bullet(x, y, this.bulletType, BulletDirection.DOWN_RIGHT);
+            bullet3.zmenUhol(45);
+            this.manazer.spravujObjekt(bullet3);
+            this.bullets.add(bullet3);
+        }
     }
 
     private void deleteBulletAfter() {
@@ -55,7 +95,7 @@ public class BulletManager {
     }
 
     private boolean detectBullet(Bullet bullet, int x, int y) {
-        if (bullet.getX() >= x || bullet.getY() >= y) {
+        if (bullet.getX() >= x || bullet.getY() >= y || bullet.getX() <= -100 ) {
             return true;
         }
         return false;
@@ -72,5 +112,9 @@ public class BulletManager {
 
     public ArrayList<Bullet> getBullets() {
         return bullets;
+    }
+
+    public int getSize() {
+        return this.bullets.size();
     }
 }

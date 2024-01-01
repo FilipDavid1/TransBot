@@ -39,17 +39,41 @@ public class Bullet {
             this.moveLeft();
         } else if (this.bulletDirection == BulletDirection.RIGHT) {
             this.moveRight();
+        } else if (this.bulletDirection == BulletDirection.UP_LEFT) {
+            this.moveUp();
+            this.moveLeft();
+        } else if (this.bulletDirection == BulletDirection.UP_RIGHT) {
+            this.moveUp();
+            this.moveRight();
+        } else if (this.bulletDirection == BulletDirection.DOWN_LEFT) {
+            this.moveDown();
+            this.moveLeft();
+        } else if (this.bulletDirection == BulletDirection.DOWN_RIGHT) {
+            this.moveDown();
+            this.moveRight();
         }
     }
 
     private void moveUp() {
-        this.nabojImg.posunZvisle(-20);
-        this.y -= 20;
+        //if bullet type is beam than move slower
+        if (this.bulletType == BulletType.BEAM) {
+            this.nabojImg.posunZvisle(-10);
+            this.y -= 10;
+        } else {
+            this.nabojImg.posunZvisle(-20);
+            this.y -= 20;
+        }
     }
 
     private void moveDown() {
-        this.nabojImg.posunZvisle(20);
-        this.y += 20;
+        //if bullet type is beam than move slower
+        if (this.bulletType == BulletType.BEAM) {
+            this.nabojImg.posunZvisle(10);
+            this.y += 10;
+        } else {
+            this.nabojImg.posunZvisle(20);
+            this.y += 20;
+        }
     }
 
     private void moveLeft() {
@@ -58,9 +82,13 @@ public class Bullet {
     }
 
     private void moveRight() {
+
         this.nabojImg.posunVodorovne(20);
         this.x += 20;
+
     }
+
+
     public int getX() {
         return this.x;
     }

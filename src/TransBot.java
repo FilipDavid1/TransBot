@@ -84,31 +84,37 @@ public class TransBot {
         }
         this.updateTransBotImg();
     }
-    public void posunHore() {
+    public void moveUp() {
         this.velY -= 20;
     }
 
-    public void posunDole() {
+    public void moveDown() {
         this.velY += 20;
     }
 
-    public void posunVlavo() {
+    public void moveToLeft() {
         this.velX -= 20;
     }
 
-    public void posunVpravo() {
+    public void moveToRight() {
         this.velX += 20;
     }
 
-    public void aktivuj() {
-        if (this.bulletType == BulletType.NORMAL || this.bulletType == BulletType.CANNON) {
+    public void shoot() {
+        if (this.bulletType == BulletType.NORMAL) {
             this.bulletManager.shoot(this.x + 35, this.y + 20);
+        } else if (this.bulletType == BulletType.BEAM) {
+            this.bulletManager.shoot3Directions(this.x + 25, this.y - 25);
+        } else if (this.bulletType == BulletType.SWORD_FIRE) {
+            this.bulletManager.shoot2Directions(this.x + 50, this.y - 25);
+        } else if (this.bulletType == BulletType.CANNON) {
+            this.bulletManager.burst(this.x + 35, this.y + 20);
         } else {
             this.bulletManager.shoot(this.x + 50, this.y - 25);
         }
     }
 
-    public void zmenNaboj() {
+    public void changeBullet() {
         this.bulletManager.changeBulletType();
         this.changeBulletType();
     }
