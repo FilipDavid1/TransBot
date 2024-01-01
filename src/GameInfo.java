@@ -1,4 +1,5 @@
 import fri.shapesge.BlokTextu;
+import fri.shapesge.StylFontu;
 
 public class GameInfo {
     private Score score;
@@ -13,6 +14,11 @@ public class GameInfo {
         this.gameInfoText = new BlokTextu("Score: " + this.score.getScore() + "Health: " + this.health.getHealth(), 200, 15);
         this.gameInfoText.zmenFarbu("black");
         this.gameInfoText.zobraz();
+
+//        BlokTextu levelText = new BlokTextu("Level: 1", 550, 450);
+//        levelText.zmenFont("Arial", StylFontu.BOLD, 100);
+//        levelText.zmenFarbu("black");
+//        levelText.zobraz();
 
     }
 
