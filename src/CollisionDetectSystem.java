@@ -20,7 +20,7 @@ public class CollisionDetectSystem {
         ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
         ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
         for (Enemy enemy : this.enemies) {
-            if (enemy.getType() == EnemyType.HILUN) {
+            if (enemy.getType() == EnemyType.HILUN || enemy.getType() == EnemyType.BOASITE) {
                 for (Bullet bullet : enemy.getBulletManager().getBullets()) {
                     if (this.detectCollision(transBot, bullet)) {
                         bulletsToRemove.add(bullet);
