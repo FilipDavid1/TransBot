@@ -80,13 +80,41 @@ public class Enemy {
             this.gelpaarMovement();
         } else if (this.type == EnemyType.GEALMEA) {
             this.gealmeaMovement();
+        } else if (this.type == EnemyType.BOASITE) {
+            this.boasiteMovement();
         }
     }
 
     private void psyballMovement() {
         //move in sine wave between y 0 and 900
-        this.enemyImg.posunVodorovne(-10);
-        this.x -= 10;
+        if (this.type == EnemyType.PSYBALL) {
+            if (this.x > 10 && !this.hasReachedBot) {
+                this.enemyImg.posunVodorovne(-10);
+                this.x -= 10;
+            } else {
+                this.hasReachedBot = true;
+            }
+
+            if (this.hasReachedBot) {
+                this.enemyImg.posunVodorovne(10);
+                this.x += 10;
+            }
+        } else {
+            if (this.x < 1300 && !this.hasReachedBot) {
+                this.enemyImg.posunVodorovne(10);
+                this.x += 10;
+            } else {
+                this.hasReachedBot = true;
+            }
+
+            if (this.hasReachedBot) {
+                this.enemyImg.posunVodorovne(-10);
+                this.x -= 10;
+            }
+        }
+        //rotate image
+        this.enemyImg.zmenUhol(angle);
+        angle += 10;
 
         this.enemyImg.posunZvisle((int)(Math.cos(this.x * 0.005) * 11));
         this.y += (int)(Math.cos(this.x * 0.005) * 11);
@@ -139,15 +167,26 @@ public class Enemy {
     public void biflerMovement() {
         //fly in from right to left with random speed
 
-        this.enemyImg.posunVodorovne(-this.randomNumber / 50 ) ;
-        this.x -= this.randomNumber / 50;
+        if (this.randomNumber / 30 <= 0) {
+            this.enemyImg.posunVodorovne(-5 ) ;
+            this.x -= 5;
+        } else {
+            this.enemyImg.posunVodorovne(-this.randomNumber / 30 ) ;
+            this.x -= this.randomNumber / 30;
+        }
 
     }
 
     public void hilunMovement() {
         //fly with random speed and rotate image and go after bot
-        this.enemyImg.posunVodorovne(-this.randomNumber / 40 ) ;
-        this.x -= this.randomNumber / 40;
+        if (-this.randomNumber / 40 <= 0) {
+            this.enemyImg.posunVodorovne(-5 ) ;
+            this.x -= 5;
+        } else {
+            this.enemyImg.posunVodorovne(-this.randomNumber / 40 ) ;
+            this.x -= this.randomNumber / 40;
+        }
+
         if (!this.isDead) {
             if (this.timer == 0 && this.x > 0 ) {
                 this.bulletManager.shoot4Directions(this.x - this.imageWidth / 2, this.y);
@@ -157,28 +196,34 @@ public class Enemy {
             }
         }
 
-        if (this.y < this.bot.getY()) {
-            this.enemyImg.posunZvisle(5);
-            this.y += 5;
-        } else if (this.y > this.bot.getY()) {
-            this.enemyImg.posunZvisle(-5);
-            this.y -= 5;
-        }
+
 
     }
 
     public void alapotMovement() {
-        //random rotation - 0 or 180 degrees after random time send to top or bottom of screen depending on rotation
         this.enemyImg.posunVodorovne(-10) ;
         this.x -= 10;
-        if (this.y <= 449) {
+
+        if (this.y < 449) {
             this.enemyImg.zmenUhol(180);
-            //this.enemyImg.posunZvisle(800);
-            //this.y += 800;
         } else {
             this.enemyImg.zmenUhol(0);
-            //this.enemyImg.posunZvisle(-800);
-            //this.y -= 800;
+        }
+
+        if (this.x <= this.bot.getX()) {
+            if (this.y < 890 && this.movingDown) {
+                this.enemyImg.posunZvisle(25);
+                this.y += 25;
+            } else {
+                this.movingDown = false;
+            }
+
+            if (this.y >= 10 && !this.movingDown) {
+                this.enemyImg.posunZvisle(-25);
+                this.y -= 25;
+            } else {
+                this.movingDown = true;
+            }
         }
     }
 
@@ -186,8 +231,13 @@ public class Enemy {
     public void zelnucMovement() {
         //fly from right to left and after reaching random x send diagonally to right and down or right and up
 
-        this.enemyImg.posunVodorovne(-this.randomNumber / 50 ) ;
-        this.x -= this.randomNumber / 50;
+        if (-this.randomNumber / 50 <= 0) {
+            this.enemyImg.posunVodorovne(-5 ) ;
+            this.x -= 5;
+        } else {
+            this.enemyImg.posunVodorovne(-this.randomNumber / 50 ) ;
+            this.x -= this.randomNumber / 50;
+        }
 
         if (this.x <= 1000) {
             if (this.y < 700 && this.movingDown) {
@@ -237,6 +287,20 @@ public class Enemy {
         this.x -= 10;
     }
 
+    public void boasiteMovement() {
+        //fly from right to left
+        this.enemyImg.posunVodorovne(-10) ;
+        this.x -= 10;
+        if (!this.isDead) {
+            if (this.timer == 0 && this.x > 0 ) {
+                this.bulletManager.shootDown(this.x - this.imageWidth / 2, this.y);
+                this.timer = 50;
+            } else {
+                this.timer--;
+            }
+        }
+    }
+
 
     public int getImageWidth() {
         return imageWidth / 2;
@@ -281,5 +345,9 @@ public class Enemy {
 
     public void setIsDead(boolean isDead) {
         this.isDead = isDead;
+    }
+
+    public boolean getHasReachedBot() {
+        return this.hasReachedBot;
     }
 }
