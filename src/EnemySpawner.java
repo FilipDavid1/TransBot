@@ -13,13 +13,13 @@ public class EnemySpawner {
     public EnemySpawner(Manazer manazer, TransBot bot) {
         this.enemies = new ArrayList<>();
         this.manazer = manazer;
-        this.time = 50;
+        this.time = 80;
         this.bot = bot;
     }
 
 
-    private void spawnPsyball(int numberOfEnemies, EnemyType enemyType) {
-        int initialX = 1400;
+    private void spawnPsyball(int numberOfEnemies, EnemyType enemyType, int x) {
+        int initialX = x;
         int initialY = 250;
 
         for (int i = 0; i < numberOfEnemies; i++) {
@@ -28,7 +28,13 @@ public class EnemySpawner {
             manazer.spravujObjekt(enemy);
 
 
-            initialX += 100;
+
+            if (x == 1400) {
+                initialX += 100;
+            } else {
+                initialX -= 100;
+            }
+
             initialY -= 10;
         }
     }
@@ -52,9 +58,11 @@ public class EnemySpawner {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
         //get random enemy type and if it is psyball, spawn more than one
-        EnemyType enemyType = EnemyType.getRandomEnemyType();
-        if (enemyType == EnemyType.PSYBALL || enemyType == EnemyType.ASCULE) {
-            this.spawnPsyball(5, enemyType);
+        EnemyType enemyType = EnemyType.BOASITE;
+        if (enemyType == EnemyType.PSYBALL) {
+            this.spawnPsyball(5, enemyType, 1400);
+        } else if (enemyType == EnemyType.ASCULE) {
+            this.spawnPsyball(5, enemyType, 0);
         } else if (enemyType == EnemyType.GEALMEA) {
             this.spawnGealmea();
         } else {
@@ -81,21 +89,37 @@ public class EnemySpawner {
             int randomNumber = random.nextInt(10) + 1;
            // spawnEnemies(randomNumber);
             this.spawnEnemy();
-            this.time = 50;
+            this.time = 80;
         } else {
             this.time--;
         }
-        this.deleteEnemyAfterX();
+        this.deleteEnemyAfter();
     }
 
-    private void deleteEnemyAfterX() {
+    private void deleteEnemyAfter() {
         ArrayList<Enemy> enemiesToDelete = new ArrayList<>();
         for (Enemy enemy : this.enemies) {
-            if (enemy.getX() <= 0) {
-                enemy.setIsDead(true);
-                enemiesToDelete.add(enemy);
-                enemy.skryObrazok();
+            if (enemy.getType() == EnemyType.ASCULE) {
+                if (enemy.getX() <= 0 && enemy.getHasReachedBot()) {
+                    enemy.setIsDead(true);
+                    enemiesToDelete.add(enemy);
+                    enemy.skryObrazok();
+                }
+
+            } else if (enemy.getType() == EnemyType.PSYBALL) {
+                if (enemy.getX() >= 1400  && enemy.getHasReachedBot()) {
+                    enemy.setIsDead(true);
+                    enemiesToDelete.add(enemy);
+                    enemy.skryObrazok();
+                }
+            } else {
+                if (enemy.getX() <= 0) {
+                    enemy.setIsDead(true);
+                    enemiesToDelete.add(enemy);
+                    enemy.skryObrazok();
+                }
             }
+
         }
 
         this.enemies.removeAll(enemiesToDelete);
