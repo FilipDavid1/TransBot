@@ -58,7 +58,7 @@ public class EnemySpawner {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
         //get random enemy type and if it is psyball, spawn more than one
-        EnemyType enemyType = EnemyType.BOASITE;
+        EnemyType enemyType = EnemyType.getRandomEnemyType();
         if (enemyType == EnemyType.PSYBALL) {
             this.spawnPsyball(5, enemyType, 1400);
         } else if (enemyType == EnemyType.ASCULE) {
