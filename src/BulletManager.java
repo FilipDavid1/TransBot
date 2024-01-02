@@ -34,6 +34,15 @@ public class BulletManager {
         }
     }
 
+    public void shootDown(int x, int y) {
+        if (this.bullets.size() < 10) {
+            Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.DOWN);
+            bullet.zmenUhol(90);
+            this.manazer.spravujObjekt(bullet);
+            this.bullets.add(bullet);
+        }
+    }
+
     public void shoot2Directions(int x, int y) {
         if (this.bullets.size() < 10) {
             Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
