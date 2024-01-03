@@ -1,3 +1,11 @@
+/**
+ * Trieda BulletType slúži na definíciu Enum prvkov
+ *
+ * @author Filip Dávid
+ *
+ * @version 1.0
+ */
+
 public enum BulletType {
     NORMAL,
     CANNON,

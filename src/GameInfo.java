@@ -1,6 +1,13 @@
 import fri.shapesge.BlokTextu;
 import fri.shapesge.StylFontu;
 
+/**
+ * Trieda GameInfo zobrazuje score, health a bulletType.
+ *
+ * @author Filip Dávid
+ *
+ * @version 1.0
+ */
 public class GameInfo {
     private Score score;
 
@@ -8,22 +15,38 @@ public class GameInfo {
 
     private BlokTextu gameInfoText;
 
-    public GameInfo(Score score, Health health) {
+    private TransBot transBot;
+
+    /**
+     * Konštruktor vytvorí objekt GameInfo v ktorom sa zobrazuje score, health a bulletType.
+     * @param score
+     * @param health
+     * @param transBot
+     */
+    public GameInfo(Score score, Health health, TransBot transBot) {
         this.score = score;
         this.health = health;
-        this.gameInfoText = new BlokTextu("Score: " + this.score.getScore() + "Health: " + this.health.getHealth(), 200, 15);
+        this.transBot = transBot;
+        this.gameInfoText = new BlokTextu(
+                "Score: " + this.score.getScore() +
+                        " | Health: " + this.health.getHealth() +
+                        " | Bullet Type: " + this.transBot.getBulletType(), 200, 25);
+        this.gameInfoText.zmenFont("Arial", StylFontu.BOLD, 20);
         this.gameInfoText.zmenFarbu("black");
         this.gameInfoText.zobraz();
 
-//        BlokTextu levelText = new BlokTextu("Level: 1", 550, 450);
-//        levelText.zmenFont("Arial", StylFontu.BOLD, 100);
-//        levelText.zmenFarbu("black");
-//        levelText.zobraz();
-
     }
 
+    /**
+     * Metóda zmení text v gameInfoText.
+     */
     public void tik() {
-        this.gameInfoText.zmenText("Score: " + this.score.getScore() + "Health: " + this.health.getHealth());
+        this.gameInfoText.zmenText(
+                "Score: " + this.score.getScore() +
+                        " | Health: " + this.health.getHealth() +
+                        " | Bullet Type: " + this.transBot.getBulletType()
+        );
+
         this.gameInfoText.zobraz();
     }
 }

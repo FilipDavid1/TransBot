@@ -2,6 +2,15 @@ import java.util.ArrayList;
 import java.util.Random;
 import fri.shapesge.Manazer;
 
+/**
+ * Trieda EnemySpawner spawnuje nepriateľov podľa skóre.
+ * Zároveň zmaže nepriateľov, ktorí prešli za herné pole.
+ *
+ * @author Filip Dávid
+ *
+ * @version 1.0
+ */
+
 public class EnemySpawner {
     private final ArrayList<Enemy> enemies;
     private final Manazer manazer;
@@ -13,6 +22,12 @@ public class EnemySpawner {
     private Score score;
 
 
+    /**
+     * Konštruktor nastaví enemies na prázdny ArrayList, time na 80 a nastaví ostatné atribúty na vstupné parametre.
+     * @param manazer
+     * @param bot
+     * @param score
+     */
     public EnemySpawner(Manazer manazer, TransBot bot, Score score) {
         this.enemies = new ArrayList<>();
         this.manazer = manazer;
@@ -22,6 +37,11 @@ public class EnemySpawner {
     }
 
 
+    /**
+     * Metóda spawnuje nepriateľov typu Psyball alebo Ascule tak, že spawnuje 5 nepriateľov v rade s 100px rozostupom.
+     * @param enemyType
+     * @param x
+     */
     private void spawnPsyball( EnemyType enemyType, int x) {
         int initialX = x;
         int initialY = 250;
@@ -30,8 +50,6 @@ public class EnemySpawner {
             Enemy enemy = new Enemy(initialX, initialY, enemyType, this.bot);
             enemies.add(enemy);
             manazer.spravujObjekt(enemy);
-
-
 
             if (x == 1400) {
                 initialX += 100;
@@ -43,8 +61,10 @@ public class EnemySpawner {
         }
     }
 
+    /**
+     * Metóda spawnuje nepriateľov typu Gealmea tak, že spawnuje 6 nepriateľov v rade s 100px rozostupom na Y.
+     */
     private void spawnGealmea() {
-        //spawn 6 gealmeas in a row with 100px distance
         int initialX = 1400;
         int initialY = 10;
 
@@ -57,6 +77,9 @@ public class EnemySpawner {
         }
     }
 
+    /**
+     * Metóda spawnuje nepriateľov podľa skóre.
+     */
     private void spawnEnemiesByScore() {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
@@ -92,7 +115,6 @@ public class EnemySpawner {
             this.spawnEnemy(EnemyType.BOASITE, 1400, randomNumber);
             this.spawnPsyball( EnemyType.PSYBALL, 1400);
         } else {
-            //get random enemy type and if it is psyball, spawn more than one
             EnemyType enemyType = EnemyType.getRandomEnemyType();
             if (enemyType == EnemyType.PSYBALL) {
                 this.spawnPsyball( enemyType, 1400);
@@ -109,12 +131,22 @@ public class EnemySpawner {
 
 
 
+    /**
+     * Metóda spawnuje nepriateľa na zadaných súradniciach.
+     * @param enemyType
+     * @param x
+     * @param y
+     */
     private void spawnEnemy(EnemyType enemyType, int x, int y) {
         Enemy enemy = new Enemy(x, y, enemyType, this.bot);
         enemies.add(enemy);
         manazer.spravujObjekt(enemy);
     }
 
+    /**
+     * Metóda vráti ArrayList nepriateľov.
+     * @return enemies
+     */
     public ArrayList<Enemy> getEnemies() {
         return this.enemies;
     }
@@ -122,6 +154,10 @@ public class EnemySpawner {
 
 
 
+    /**
+     * Metóda zavolá metódu spawnEnemiesByScore ak je time 0, inak time zníži o 1.
+     * Metóda zavolá metódu deleteEnemyAfter.
+     */
     public void tik() {
         if (this.time == 0) {
             this.spawnEnemiesByScore();
@@ -132,6 +168,9 @@ public class EnemySpawner {
         this.deleteEnemyAfter();
     }
 
+    /**
+     * Metóda zmaže nepriateľov, ktorí prešli za herné pole.
+     */
     private void deleteEnemyAfter() {
         ArrayList<Enemy> enemiesToDelete = new ArrayList<>();
         for (Enemy enemy : this.enemies) {

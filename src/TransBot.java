@@ -1,10 +1,13 @@
 import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
 /**
- * Write a description of class TransBot here.
+ * Trieda TransBot vytvára objekt transbota, ktorým hráč ovláda.
+ * TransBot sa pohybuje po mape a strieľa na nepriateľov.
+ * Zároveň má životy a bulletType.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Filip Dávid
+ *
+ * @version 1.0
  */
 public class TransBot {
     private Obrazok transBotImg;
@@ -23,7 +26,10 @@ public class TransBot {
     private DataObrazku dataObrazku;
 
     private Health health;
-    
+
+    /**
+     * Constructor for objects of class TransBot
+     */
     public TransBot(int x, int y) {
         this.transBotImg = new Obrazok("../pics/transBot/transBotJet.png");
         this.x = x;
@@ -40,6 +46,9 @@ public class TransBot {
     }
 
 
+    /**
+     * Metóda updatne obrázok transbota podľa toho aký bulletType má.
+     */
     private void updateTransBotImg() {
         if (this.bulletType == BulletType.NORMAL || this.bulletType == BulletType.CANNON) {
             this.transBotImg.skry();
@@ -57,6 +66,10 @@ public class TransBot {
         this.transBotImg.zmenPolohu(this.x, this.y);
         this.transBotImg.zobraz();
     }
+
+    /**
+     * Metóda mení polohu transbota podľa toho či sa pohol.
+     */
     public void tik() {
         this.x += this.velX;
         this.y += this.velY;
@@ -77,6 +90,9 @@ public class TransBot {
         this.transBotImg.zmenPolohu(this.x, this.y);
     }
 
+    /**
+     * Metóda updatne obrázok transbota podľa toho aký bulletType má.
+     */
     private void changeBulletType() {
         this.bulletType = BulletType.values()[this.bulletType.ordinal() + 1];
         if (this.bulletType.ordinal() > 4) {
@@ -84,22 +100,38 @@ public class TransBot {
         }
         this.updateTransBotImg();
     }
+
+    /**
+     * Metoda zníži atribút velY o 20.
+     */
     public void moveUp() {
         this.velY -= 20;
     }
 
+    /**
+     * Metoda zvýši atribút velY o 20.
+     */
     public void moveDown() {
         this.velY += 20;
     }
 
+    /**
+     * Metoda zníži atribút velX o 20.
+     */
     public void moveToLeft() {
         this.velX -= 20;
     }
 
+    /**
+     * Metoda zvýši atribút velX o 20.
+     */
     public void moveToRight() {
         this.velX += 20;
     }
 
+    /**
+     * Metoda zavolá metódu shoot z bulletManagera podľa toho aký bulletType má.
+     */
     public void shoot() {
         if (this.bulletType == BulletType.NORMAL) {
             this.bulletManager.shoot(this.x + 35, this.y + 20);
@@ -114,51 +146,101 @@ public class TransBot {
         }
     }
 
+    /**
+     * Metoda zavolá metódu changeBullet z bulletManagera a zavolá metódu changeBulletType čím zmení bulletType.
+     */
     public void changeBullet() {
         this.bulletManager.changeBulletType();
         this.changeBulletType();
     }
-    
+
+    /**
+     * Metóda nastaví velX na 0.
+     */
     public void stopX() {
         this.setVelX(0);
     }
 
+    /**
+     * Metóda nastaví velY na 0.
+     */
     public void stopY() {
         this.setVelY(0);
     }
 
 
 
+    /**
+     * Metóda zavolá metódu getBulletManager z bulletManagera.
+     * @return bulletManager
+     */
     public BulletManager getBulletManager() {
         return this.bulletManager;
     }
+
+    /**
+     * Metóda nastaví velX na zadanú hodnotu.
+     * @param velX
+     */
     private void setVelX(int velX) {
         this.velX = velX;
     }
 
+    /**
+     * Metóda nastaví velY na zadanú hodnotu.
+     * @param velY
+     */
     private void setVelY(int velY) {
         this.velY = velY;
     }
 
 
+    /**
+     * Metóda vráti súradnicu X.
+     * @return this.x
+     */
     public int getX() {
         return this.x;
     }
 
+    /**
+     * Metóda vráti súradnicu Y.
+     * @return this.y
+     */
     public int getY() {
         return this.y;
     }
 
+    /**
+     * Metóda vráti šírku obrázku transbota / 2.
+     * @return transBotImg / 2
+     */
     public int getImageWidth() {
         return this.imageWidth / 2;
     }
 
+    /**
+     * Metóda vráti výšku obrázku transbota / 2.
+     * @return transBotImg / 2
+     */
     public int getImageHeight() {
         return this.imageHeight / 2;
     }
 
+    /**
+     * Metóda vráti životy transbota.
+     * @return health
+     */
     public Health getHealth() {
         return this.health;
+    }
+
+    /**
+     * Metóda vráti bulletType.
+     * @return bulletType
+     */
+    public BulletType getBulletType() {
+        return this.bulletManager.getBulletType();
     }
 
 }

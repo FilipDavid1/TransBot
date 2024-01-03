@@ -4,10 +4,12 @@ import fri.shapesge.Obrazok;
 import java.util.Random;
 
 /**
- * Write a description of class Enemy here.
+ * Trieda Enemy vytvára nepriateľa, ktorý sa pohybuje podľa typu.
+ * Niektoré nepriateľovia strieľajú a majú viac životov.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Filip Dávid
+ *
+ * @version 1.0
  */
 public class Enemy {
     private final Obrazok enemyImg;
@@ -34,6 +36,13 @@ public class Enemy {
     private boolean isDead;
 
     private final BulletManager bulletManager;
+
+    /**
+     * Konštruktor vytvorí nepriateľa na súradniciach x a y a nastaví mu typ, taktiež nastaví ostatné atribúty.
+     * @param x
+     * @param y
+     * @param type
+     */
     public Enemy(int x, int y, EnemyType type, TransBot bot) {
         this.type = type;
         this.enemyImg = new Obrazok("../pics/enemy/" + this.type.getEnemyImg() + ".png");
@@ -60,7 +69,9 @@ public class Enemy {
 
 
 
-
+    /**
+     * Metóda vykonáva pohyb nepriateľa podľa typu.
+     */
     public void tik() {
         if (this.type == EnemyType.PSYBALL || this.type == EnemyType.ASCULE) {
             this.psyballMovement();
@@ -85,8 +96,11 @@ public class Enemy {
         }
     }
 
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu psyball.
+     * Pohyb je vykonávaný pomocou cosinusovej funkcie a letí zprava doľava, ak dosiahne určitú x-ovú súradnicu tak letí zľava doprava.
+     */
     private void psyballMovement() {
-        //move in sine wave between y 0 and 900
         if (this.type == EnemyType.PSYBALL) {
             if (this.x > 10 && !this.hasReachedBot) {
                 this.enemyImg.posunVodorovne(-10);
@@ -112,7 +126,6 @@ public class Enemy {
                 this.x -= 10;
             }
         }
-        //rotate image
         this.enemyImg.zmenUhol(angle);
         angle += 10;
 
@@ -122,6 +135,10 @@ public class Enemy {
 
     }
 
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu elblink.
+     * Elblink sa pohybuje zprava doľava a po dosiahnutí x-ovej súradnice robota sa pohybuje nahor alebo nadol.
+     */
     private void elblinkMovement() {
         //move enemy left the moment this.x is more than this.bot.getX() set hasReachedBot to true and only move down or up depending on this.y
 
@@ -154,8 +171,11 @@ public class Enemy {
 
     }
 
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu luvoque.
+     * Luvoque sa pohybuje zprava doľava a rotuje sa.
+     */
     private void luvoqueMovement() {
-        //spin image constantly and slowly move up and left
         this.enemyImg.zmenUhol(angle);
         angle += 10;
         this.enemyImg.posunZvisle(-2);
@@ -164,9 +184,11 @@ public class Enemy {
         this.y -= 2;
     }
 
-    public void biflerMovement() {
-        //fly in from right to left with random speed
-
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu bifler.
+     * Bifler sa pohybuje zprava doľava, jeho rýchlosť je náhodná.
+     */
+    private void biflerMovement() {
         if (this.randomNumber / 30 <= 5) {
             this.enemyImg.posunVodorovne(-10 ) ;
             this.x -= 10;
@@ -177,8 +199,11 @@ public class Enemy {
 
     }
 
-    public void hilunMovement() {
-        //fly with random speed and rotate image and go after bot
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu hilun.
+     * Hilun sa pohybuje zprava doľava a strieľa do všetkých strán.
+     */
+    private void hilunMovement() {
         if (-this.randomNumber / 40 <= 0) {
             this.enemyImg.posunVodorovne(-5 ) ;
             this.x -= 5;
@@ -200,7 +225,11 @@ public class Enemy {
 
     }
 
-    public void alapotMovement() {
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu alapot.
+     * Alapot sa pohybuje zprava doľava a po dosiahnutí x-ovej súradnice robota sa pohybuje nahor alebo nadol.
+     */
+    private void alapotMovement() {
         this.enemyImg.posunVodorovne(-10) ;
         this.x -= 10;
 
@@ -227,10 +256,11 @@ public class Enemy {
         }
     }
 
-
-    public void zelnucMovement() {
-        //fly from right to left and after reaching random x send diagonally to right and down or right and up
-
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu zelnuc.
+     * Zelnuc sa pohybuje zprava doľava a po dosiahnutí určitej x-ovej súradnice sa pohybuje šikmo nahor alebo nadol.
+     */
+    private void zelnucMovement() {
         if (-this.randomNumber / 50 <= 0) {
             this.enemyImg.posunVodorovne(-5 ) ;
             this.x -= 5;
@@ -262,7 +292,11 @@ public class Enemy {
         }
     }
 
-    public void gelpaarMovement() {
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu gelpaar.
+     * Gelpaar sa pohybuje po kružnici.
+     */
+    private void gelpaarMovement() {
         int centerX = this.x;
         int centerY = this.y;
 
@@ -281,14 +315,20 @@ public class Enemy {
         this.enemyImg.zmenPolohu(newX, newY);
     }
 
-    public void gealmeaMovement() {
-        //fly from right to left
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu gealmea.
+     * Gealmea sa pohybuje zprava doľava.
+     */
+    private void gealmeaMovement() {
         this.enemyImg.posunVodorovne(-10) ;
         this.x -= 10;
     }
 
-    public void boasiteMovement() {
-        //fly from right to left
+    /**
+     * Metóda vykonáva pohyb nepriateľa typu boasite.
+     * Boasite sa pohybuje zprava doľava a strieľa dole.
+     */
+    private void boasiteMovement() {
         this.enemyImg.posunVodorovne(-10) ;
         this.x -= 10;
         if (!this.isDead) {
@@ -301,52 +341,96 @@ public class Enemy {
         }
     }
 
-
+    /**
+     * Metóda vráti šírku obrázku nepriateľa / 2.
+     * @return imageWidth / 2
+     */
     public int getImageWidth() {
         return imageWidth / 2;
     }
 
+    /**
+     * Metóda vráti výšku obrázku nepriateľa / 2.
+     * @return imageHeight / 2
+     */
     public int getImageHeight() {
         return imageHeight / 2;
     }
 
+    /**
+     * Metóda vráti x-ovú súradnicu nepriateľa.
+     * @return x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Metóda vráti y-ovú súradnicu nepriateľa.
+     * @return y
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Metóda skryje obrázok nepriateľa.
+     */
     public void skryObrazok() {
         this.enemyImg.skry();
     }
 
+    /**
+     * Metóda vráti typ nepriateľa.
+     * @return type
+     */
     public EnemyType getType() {
         return this.type;
     }
 
+    /**
+     * Metóda nastaví x-ovú súradnicu nepriateľa.
+     */
     public void setX(int x) {
         this.x = x;
         this.enemyImg.zmenPolohu(this.x, this.y);
     }
 
+    /**
+     * Metóda nastaví životy nepriateľa.
+     */
     public void setHealth(int health) {
         this.health = health;
     }
 
+    /**
+     * Metóda vráti životy nepriateľa.
+     * @return health
+     */
     public int getHealth() {
         return this.health;
     }
 
+    /**
+     * Metóda vráti bulletManager nepriateľa.
+     * @return bulletManager
+     */
     public BulletManager getBulletManager() {
         return this.bulletManager;
     }
 
+    /**
+     * Metóda nastaí isDead.
+     * @param isDead
+     */
     public void setIsDead(boolean isDead) {
         this.isDead = isDead;
     }
 
+    /**
+     * Metóda vráti hasReachedBot.
+     * @return hasReachedBot
+     */
     public boolean getHasReachedBot() {
         return this.hasReachedBot;
     }

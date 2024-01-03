@@ -1,5 +1,12 @@
 import java.util.Random;
 
+/**
+ * Trieda EnemyType obsahuje typy nepriateľov.
+ *
+ * @author Filip Dávid
+ *
+ * @version 1.0
+ */
 public enum EnemyType {
     ALAPOT,
     ASCULE,
@@ -14,6 +21,10 @@ public enum EnemyType {
     PSYBALL,
     ZELNUC;
 
+    /**
+     * Metóda vráti názov obrázku nepriateľa.
+     * @return názov obrázku nepriateľa
+     */
     public String getEnemyImg() {
         switch (this) {
             case ALAPOT:

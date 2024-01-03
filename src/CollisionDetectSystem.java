@@ -1,5 +1,14 @@
 import java.util.ArrayList;
 
+/**
+ * Trieda CollisionDetectSystem detekuje kolíziu medzi nepriateľmi a TransBotom, medzi nepriateľmi a TransBotovými nábojmi a medzi TransBotom a nepriateľovými nábojmi.
+ * Zároveň zisťuje či nepriateľ zomrel a ak áno, tak ho odstráni z ArrayListu enemies.
+ * Zároveň zisťuje či náboj zasiahol nepriateľa a ak áno, tak ho odstráni z ArrayListu enemies.
+ *
+ * @author Filip Dávid
+ *
+ * @version 1.0
+ */
 public class CollisionDetectSystem {
 
     private ArrayList<Enemy> enemies;
@@ -9,6 +18,13 @@ public class CollisionDetectSystem {
 
     private Score score;
 
+    /**
+     * Konštruktor nastaví vstupné parametre na atribúty.
+     * @param enemies
+     * @param bullets
+     * @param transBot
+     * @param score
+     */
     public CollisionDetectSystem(ArrayList<Enemy> enemies, ArrayList<Bullet> bullets, TransBot transBot, Score score) {
         this.enemies = enemies;
         this.bullets = bullets;
@@ -16,6 +32,9 @@ public class CollisionDetectSystem {
         this.score = score;
     }
 
+    /**
+     * Metóda detekuje kolíziu medzi nepriateľmi a TransBotom, medzi nepriateľmi a TransBotovými nábojmi a medzi TransBotom a nepriateľovými nábojmi.
+     */
     private void detectAndRemoveCollision() {
         ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
         ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
@@ -74,10 +93,19 @@ public class CollisionDetectSystem {
         this.bullets.removeAll(bulletsToRemove);
     }
 
+    /**
+     * Metóda zavolá metódu detectAndRemoveCollision, ktorá detekuje kolízie.
+     */
     public void tik() {
         this.detectAndRemoveCollision();
     }
 
+    /**
+     * Metóda detekuje kolíziu medzi nepriateľom a nábojom.
+     * @param enemy
+     * @param bullet
+     * @return true ak nastala kolízia, inak false
+     */
     private boolean detectCollision(Enemy enemy, Bullet bullet) {
         int enemyLeft = enemy.getX();
         int enemyRight = enemy.getX() + enemy.getImageWidth();
@@ -95,6 +123,12 @@ public class CollisionDetectSystem {
                 (enemyBottom + 10) > bulletTop;
     }
 
+    /**
+     * Metóda detekuje kolíziu medzi TransBotom a nábojom.
+     * @param bot
+     * @param bullet
+     * @return true ak nastala kolízia, inak false
+     */
     private boolean detectCollision(TransBot bot, Bullet bullet) {
         //detect collision between transbot and Hilun bullets - it shoots 4 bullets at once
         int botLeft = bot.getX();
@@ -113,6 +147,12 @@ public class CollisionDetectSystem {
                 (botBottom + 10) > bulletTop;
     }
 
+    /**
+     * Metóda detekuje kolíziu medzi nepriateľom a TransBotom.
+     * @param enemy
+     * @param transBot
+     * @return true ak nastala kolízia, inak false
+     */
     private boolean detectCollision(Enemy enemy, TransBot transBot) {
         int enemyLeft = enemy.getX();
         int enemyRight = enemy.getX() + enemy.getImageWidth();
