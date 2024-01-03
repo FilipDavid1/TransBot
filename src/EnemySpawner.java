@@ -3,26 +3,30 @@ import java.util.Random;
 import fri.shapesge.Manazer;
 
 public class EnemySpawner {
-    private ArrayList<Enemy> enemies;
-    private Manazer manazer;
+    private final ArrayList<Enemy> enemies;
+    private final Manazer manazer;
 
     private int time;
 
-    private TransBot bot;
+    private final TransBot bot;
 
-    public EnemySpawner(Manazer manazer, TransBot bot) {
+    private Score score;
+
+
+    public EnemySpawner(Manazer manazer, TransBot bot, Score score) {
         this.enemies = new ArrayList<>();
         this.manazer = manazer;
         this.time = 80;
         this.bot = bot;
+        this.score = score;
     }
 
 
-    private void spawnPsyball(int numberOfEnemies, EnemyType enemyType, int x) {
+    private void spawnPsyball( EnemyType enemyType, int x) {
         int initialX = x;
         int initialY = 250;
 
-        for (int i = 0; i < numberOfEnemies; i++) {
+        for (int i = 0; i < 5; i++) {
             Enemy enemy = new Enemy(initialX, initialY, enemyType, this.bot);
             enemies.add(enemy);
             manazer.spravujObjekt(enemy);
@@ -53,27 +57,63 @@ public class EnemySpawner {
         }
     }
 
-    //spawn one enemy at random y and 1400 x
-    private void spawnEnemy() {
+    private void spawnEnemiesByScore() {
         Random random = new Random();
         int randomNumber = random.nextInt(850);
-        //get random enemy type and if it is psyball, spawn more than one
-        EnemyType enemyType = EnemyType.getRandomEnemyType();
-        if (enemyType == EnemyType.PSYBALL) {
-            this.spawnPsyball(5, enemyType, 1400);
-        } else if (enemyType == EnemyType.ASCULE) {
-            this.spawnPsyball(5, enemyType, 0);
-        } else if (enemyType == EnemyType.GEALMEA) {
+
+        if (this.score.getScore() <= 2000) {
+            this.spawnEnemy(EnemyType.PSYBALL, 1400, randomNumber);
+        } else if (this.score.getScore() > 2000 && this.score.getScore() <= 3000) {
+            this.spawnEnemy(EnemyType.ASCULE, 0, randomNumber);
+        } else if (this.score.getScore() > 3000 && this.score.getScore() <= 5000) {
+            this.spawnPsyball( EnemyType.PSYBALL, 1400);
+            this.spawnPsyball( EnemyType.ASCULE, 0);
+        } else if (this.score.getScore() > 5000 && this.score.getScore() <= 7000) {
+            this.spawnEnemy(EnemyType.ELBLINK, 1400, randomNumber);
+        } else if (this.score.getScore() > 7000 && this.score.getScore() <= 9000) {
+            this.spawnEnemy(EnemyType.LUVOGUE, 1400, randomNumber);
+            this.spawnEnemy(EnemyType.ZELNUC, 1700, randomNumber );
+        } else if (this.score.getScore() > 9000 && this.score.getScore() <= 11000) {
             this.spawnGealmea();
+            this.spawnEnemy(EnemyType.GELPAAR, 1400, randomNumber + 100);
+        } else if (this.score.getScore() > 11000 && this.score.getScore() <= 13000) {
+            this.spawnEnemy(EnemyType.BIFLER, 1400, randomNumber);
+            this.spawnEnemy(EnemyType.BIFLER, 1400, randomNumber + 100);
+            this.spawnEnemy(EnemyType.BIFLER, 1400, randomNumber + 200);
+            this.spawnEnemy(EnemyType.ELBLINK, 1800, randomNumber);
+            this.spawnGealmea();
+        } else if (this.score.getScore() > 13000 && this.score.getScore() <= 15000) {
+            this.spawnEnemy(EnemyType.HILUN, 1400, randomNumber);
+            this.spawnPsyball( EnemyType.ASCULE, 0);
+        } else if (this.score.getScore() > 15000 && this.score.getScore() <= 17000) {
+            this.spawnEnemy(EnemyType.ALAPOT, 1600, randomNumber);
+            this.spawnEnemy(EnemyType.HILUN, 1400, randomNumber + 100);
+        } else if (this.score.getScore() > 1000 && this.score.getScore() <= 19000) {
+            this.spawnEnemy(EnemyType.BOASITE, 1400, randomNumber);
+            this.spawnPsyball( EnemyType.PSYBALL, 1400);
         } else {
-            Enemy enemy = new Enemy(1400, randomNumber, enemyType, this.bot);
-            enemies.add(enemy);
-            manazer.spravujObjekt(enemy);
+            //get random enemy type and if it is psyball, spawn more than one
+            EnemyType enemyType = EnemyType.getRandomEnemyType();
+            if (enemyType == EnemyType.PSYBALL) {
+                this.spawnPsyball( enemyType, 1400);
+            } else if (enemyType == EnemyType.ASCULE) {
+                this.spawnPsyball( enemyType, 0);
+            } else if (enemyType == EnemyType.GEALMEA) {
+                this.spawnGealmea();
+            } else {
+                this.spawnEnemy(enemyType, 1400, randomNumber);
+            }
         }
+
     }
 
 
 
+    private void spawnEnemy(EnemyType enemyType, int x, int y) {
+        Enemy enemy = new Enemy(x, y, enemyType, this.bot);
+        enemies.add(enemy);
+        manazer.spravujObjekt(enemy);
+    }
 
     public ArrayList<Enemy> getEnemies() {
         return this.enemies;
@@ -84,11 +124,7 @@ public class EnemySpawner {
 
     public void tik() {
         if (this.time == 0) {
-            //spawn random number of enemies
-            Random random = new Random();
-            int randomNumber = random.nextInt(10) + 1;
-           // spawnEnemies(randomNumber);
-            this.spawnEnemy();
+            this.spawnEnemiesByScore();
             this.time = 80;
         } else {
             this.time--;
@@ -124,7 +160,4 @@ public class EnemySpawner {
 
         this.enemies.removeAll(enemiesToDelete);
     }
-
-    //spawn enemies with movement from right to left
-
 }

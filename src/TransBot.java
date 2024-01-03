@@ -15,7 +15,7 @@ public class TransBot {
 
     private BulletType bulletType;
 
-    private BulletManager bulletManager;
+    private final BulletManager bulletManager;
 
     private int imageWidth;
     private int imageHeight;
@@ -25,14 +25,14 @@ public class TransBot {
     private Health health;
     
     public TransBot(int x, int y) {
-        this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
+        this.transBotImg = new Obrazok("../pics/transBot/transBotJet.png");
         this.x = x;
         this.y = y;
         this.transBotImg.zmenPolohu(x, y);
         this.transBotImg.zobraz();
         this.bulletType = BulletType.NORMAL;
         this.bulletManager = new BulletManager(this.bulletType);
-        this.dataObrazku = new DataObrazku("src/pics/transBot/transBotJet.png");
+        this.dataObrazku = new DataObrazku("../pics/transBot/transBotJet.png");
         this.imageHeight = dataObrazku.getVyska();
         this.imageWidth = dataObrazku.getSirka();
         this.health = new Health();
@@ -43,14 +43,14 @@ public class TransBot {
     private void updateTransBotImg() {
         if (this.bulletType == BulletType.NORMAL || this.bulletType == BulletType.CANNON) {
             this.transBotImg.skry();
-            this.transBotImg = new Obrazok("src/pics/transBot/transBotJet.png");
-            this.dataObrazku = new DataObrazku("src/pics/transBot/transBotJet.png");
+            this.transBotImg = new Obrazok("../pics/transBot/transBotJet.png");
+            this.dataObrazku = new DataObrazku("../pics/transBot/transBotJet.png");
             this.imageHeight = dataObrazku.getVyska();
             this.imageWidth = dataObrazku.getSirka();
         } else {
             this.transBotImg.skry();
-            this.transBotImg = new Obrazok("src/pics/transBot/transBot.png");
-            this.dataObrazku = new DataObrazku("src/pics/transBot/transBot.png");
+            this.transBotImg = new Obrazok("../pics/transBot/transBot.png");
+            this.dataObrazku = new DataObrazku("../pics/transBot/transBot.png");
             this.imageHeight = dataObrazku.getVyska();
             this.imageWidth = dataObrazku.getSirka();
         }

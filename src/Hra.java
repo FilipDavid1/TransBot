@@ -6,36 +6,36 @@ import fri.shapesge.Manazer;
  * @version (a version number or a date)
  */
 public class Hra {
-    private Manazer manazer;
-    private TransBot bot;
-    private EnemySpawner enemySpawner;
-    private Mapa mapa;
-    private Mapa mapa2;
+    private final TransBot bot;
+    private final EnemySpawner enemySpawner;
+    private final Mapa mapa;
+    private final Mapa mapa2;
 
-    private CollisionDetectSystem collisionDetectSystem;
+    private final CollisionDetectSystem collisionDetectSystem;
 
     private Score score;
 
-    private GameInfo gameInfo;
+    private final GameInfo gameInfo;
 
 
     
     public Hra() {
-        this.manazer = new Manazer();
+        Manazer manazer = new Manazer();
+        manazer = new Manazer();
         this.bot = new TransBot(20, 480);
         this.mapa = new Mapa(0, 800);
         this.mapa2 = new Mapa(1620 , 800);
         this.score = new Score();
         this.gameInfo = new GameInfo(this.score, this.bot.getHealth());
-        this.enemySpawner = new EnemySpawner(this.manazer, this.bot);
+        this.enemySpawner = new EnemySpawner(manazer, this.bot, this.score);
         this.collisionDetectSystem = new CollisionDetectSystem(this.enemySpawner.getEnemies(), this.bot.getBulletManager().getBullets(), this.bot, this.score);
-        this.manazer.spravujObjekt(this);
-        this.manazer.spravujObjekt(this.mapa);
-        this.manazer.spravujObjekt(this.mapa2);
-        this.manazer.spravujObjekt(this.bot);
-        this.manazer.spravujObjekt(this.collisionDetectSystem);
-        this.manazer.spravujObjekt(this.enemySpawner);
-        this.manazer.spravujObjekt(this.gameInfo);
+        manazer.spravujObjekt(this);
+        manazer.spravujObjekt(this.mapa);
+        manazer.spravujObjekt(this.mapa2);
+        manazer.spravujObjekt(this.bot);
+        manazer.spravujObjekt(this.collisionDetectSystem);
+        manazer.spravujObjekt(this.enemySpawner);
+        manazer.spravujObjekt(this.gameInfo);
     }
 
 

@@ -6,16 +6,14 @@ import fri.shapesge.Obrazok;
  * @version (a version number or a date)
  */
 public class Mapa {
-    private Obrazok mapaImg;
+    private final Obrazok mapaImg;
     private int x;
     private int y;
-    private int mapWidth;
-    
+
     public Mapa(int x, int y) {
         this.x = x;
         this.y = y;
-        this.mapWidth = 1460;
-        this.mapaImg = new Obrazok("src/pics/maps/robo.png");
+        this.mapaImg = new Obrazok("../pics/maps/robo.png");
         this.mapaImg.zmenPolohu(x, y);
         this.mapaImg.zobraz();
     }

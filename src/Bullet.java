@@ -7,20 +7,20 @@ import fri.shapesge.Obrazok;
  * @version (a version number or a date)
  */
 public class Bullet {
-    private Obrazok nabojImg;
+    private final Obrazok nabojImg;
     private int x;
     private int y;
 
-    private int imageWidth;
-    private int imageHeight;
+    private final int imageWidth;
+    private final int imageHeight;
     private BulletType bulletType;
 
     private BulletDirection bulletDirection;
 
     public Bullet(int x, int y, BulletType bulletType, BulletDirection bulletDirection) {
         this.bulletType = bulletType;
-        this.nabojImg = new Obrazok("src/pics/amo/" + this.getNazovNaboja() + ".png");
-        DataObrazku image = new DataObrazku("src/pics/amo/" + this.getNazovNaboja() + ".png");
+        this.nabojImg = new Obrazok("../pics/amo/" + this.getNazovNaboja() + ".png");
+        DataObrazku image = new DataObrazku("../pics/amo/" + this.getNazovNaboja() + ".png");
         this.imageHeight = image.getVyska();
         this.imageWidth = image.getSirka();
         this.x = x;

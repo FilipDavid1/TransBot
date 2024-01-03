@@ -23,7 +23,7 @@ public class Enemy {
 
     private int angle;
 
-    private TransBot bot;
+    private final TransBot bot;
 
     private boolean hasReachedBot;
 
@@ -33,11 +33,11 @@ public class Enemy {
 
     private boolean isDead;
 
-    private BulletManager bulletManager;
+    private final BulletManager bulletManager;
     public Enemy(int x, int y, EnemyType type, TransBot bot) {
         this.type = type;
-        this.enemyImg = new Obrazok("src/pics/enemy/" + this.type.getEnemyImg() + ".png");
-        DataObrazku image = new DataObrazku("src/pics/enemy/" + this.type.getEnemyImg() + ".png");
+        this.enemyImg = new Obrazok("../pics/enemy/" + this.type.getEnemyImg() + ".png");
+        DataObrazku image = new DataObrazku("../pics/enemy/" + this.type.getEnemyImg() + ".png");
         this.imageHeight = image.getVyska();
         this.imageWidth = image.getSirka();
         this.x = x;
@@ -167,9 +167,9 @@ public class Enemy {
     public void biflerMovement() {
         //fly in from right to left with random speed
 
-        if (this.randomNumber / 30 <= 0) {
-            this.enemyImg.posunVodorovne(-5 ) ;
-            this.x -= 5;
+        if (this.randomNumber / 30 <= 5) {
+            this.enemyImg.posunVodorovne(-10 ) ;
+            this.x -= 10;
         } else {
             this.enemyImg.posunVodorovne(-this.randomNumber / 30 ) ;
             this.x -= this.randomNumber / 30;
