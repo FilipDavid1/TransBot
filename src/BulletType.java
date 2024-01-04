@@ -15,4 +15,7 @@ public enum BulletType {
     ENEMY_BULLET;
 
 
+    public BulletType getRandomBulletType() {
+        return values()[(int)(Math.random() * values().length)];
+    }
 }

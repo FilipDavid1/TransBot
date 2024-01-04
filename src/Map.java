@@ -20,7 +20,7 @@ public class Map {
     public Map(int x, int y) {
         this.x = x;
         this.y = y;
-        this.mapaImg = new Obrazok("../pics/maps/robo.png");
+        this.mapaImg = new Obrazok("src/pics/maps/map.png");
         this.mapaImg.zmenPolohu(x, y);
         this.mapaImg.zobraz();
     }

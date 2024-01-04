@@ -44,7 +44,6 @@ public class CollisionDetectSystem {
                     if (this.detectCollision(transBot, bullet)) {
                         bulletsToRemove.add(bullet);
                         bullet.skryObrazok();
-                        System.out.println("HIT");
                         this.transBot.getHealth().decreaseHealth();
                     }
                 }

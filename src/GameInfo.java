@@ -13,7 +13,11 @@ public class GameInfo {
 
     private Health health;
 
-    private BlokTextu gameInfoText;
+    private BlokTextu scoreText;
+
+    private BlokTextu healthText;
+
+    private BlokTextu bulletTypeText;
 
     private TransBot transBot;
 
@@ -27,26 +31,33 @@ public class GameInfo {
         this.score = score;
         this.health = health;
         this.transBot = transBot;
-        this.gameInfoText = new BlokTextu(
-                "Score: " + this.score.getScore() +
-                        " | Health: " + this.health.getHealth() +
-                        " | Bullet Type: " + this.transBot.getBulletType(), 200, 25);
-        this.gameInfoText.zmenFont("Arial", StylFontu.BOLD, 20);
-        this.gameInfoText.zmenFarbu("black");
-        this.gameInfoText.zobraz();
 
+        this.scoreText = new BlokTextu("Score: " + this.score.getScore(), 670, 30);
+        this.scoreText.zmenFont("Helvetica", StylFontu.PLAIN, 20);
+        this.scoreText.zobraz();
+
+        this.healthText = new BlokTextu("Health: " + this.health.getHealth(), 20, 30);
+        this.healthText.zmenFont("Helvetica", StylFontu.PLAIN, 20);
+        this.healthText.zobraz();
+
+        this.bulletTypeText = new BlokTextu("Bullet Type: " + this.transBot.getBulletType(), 1200, 30);
+        this.bulletTypeText.zmenFont("Helvetica", StylFontu.PLAIN, 20);
+        this.bulletTypeText.zobraz();
+
+    }
+
+    public void hideInfo() {
+        this.scoreText.skry();
+        this.healthText.skry();
+        this.bulletTypeText.skry();
     }
 
     /**
      * Metóda zmení text v gameInfoText.
      */
     public void tik() {
-        this.gameInfoText.zmenText(
-                "Score: " + this.score.getScore() +
-                        " | Health: " + this.health.getHealth() +
-                        " | Bullet Type: " + this.transBot.getBulletType()
-        );
-
-        this.gameInfoText.zobraz();
+        this.scoreText.zmenText("Score: " + this.score.getScore());
+        this.healthText.zmenText("Health: " + this.health.getHealth());
+        this.bulletTypeText.zmenText("Bullet Type: " + this.transBot.getBulletType());
     }
 }

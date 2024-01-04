@@ -28,7 +28,7 @@ public class TransBot {
     private Health health;
 
     /**
-     * Constructor for objects of class TransBot
+     * Konštruktor vytvorí objekt transbota na súradniciach x a y.
      */
     public TransBot(int x, int y) {
         this.transBotImg = new Obrazok("../pics/transBot/transBotJet.png");
@@ -241,6 +241,13 @@ public class TransBot {
      */
     public BulletType getBulletType() {
         return this.bulletManager.getBulletType();
+    }
+
+    /**
+     * Metóda skryje obrázok transbota.
+     */
+    public void hideImage() {
+        this.transBotImg.skry();
     }
 
 }

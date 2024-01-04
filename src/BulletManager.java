@@ -12,7 +12,7 @@ import fri.shapesge.Manazer;
  * @version 1.0
  */
 public class BulletManager {
-    private ArrayList<Bullet> bullets;
+    private final ArrayList<Bullet> bullets;
     private Manazer manazer;
 
     private BulletType bulletType;
