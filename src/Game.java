@@ -1,16 +1,16 @@
 import fri.shapesge.Manazer;
 
-
 /**
- * Trieda Game je singleton, ktorý sa stará o vytvorenie a správu herných objektov.
- * Vytvára herné objekty a pridáva ich do manazéra.
+ * The Game class creates game objects and adds them to the manager. It also handles game termination.
  *
  * @author Filip Dávid
- *
  * @version 1.0
  */
 public class Game {
-    private static Game instance;
+
+    private static Game instance = null;
+
+    private Manazer manazer;
     private TransBot bot;
     private EnemySpawner enemySpawner;
     private Map map;
@@ -18,20 +18,19 @@ public class Game {
     private CollisionDetectSystem collisionDetectSystem;
     private Score score;
     private GameInfo gameInfo;
-    private Manazer manazer;
-    private boolean isRunning;
     private GameMenu gameMenu;
 
+    private boolean isRunning;
+
     /**
-     * Súkromný konštruktor nastaví všetky herné objekty pomocou metódy initializeGameObjects().
+     * Private constructor to initialize game objects and add them to the manager.
      */
     private Game() {
         initializeGameObjects();
+        this.isRunning = false;
+        this.gameMenu = new GameMenu();
     }
 
-    /**
-     * Metóda vráti inštanciu triedy Game.
-     */
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
@@ -40,16 +39,41 @@ public class Game {
     }
 
     /**
-     * Metóda inicializuje herné objekty.
+     * Starts the game by adding objects to the manager and hiding the menu.
+     */
+    public void startGame() {
+        if (!this.isRunning) {
+            addObjectsToManager();
+            this.gameMenu.hideMenu();
+            this.isRunning = true;
+        }
+    }
+
+    /**
+     * Restarts the game by stopping processes, clearing objects, and reinitializing.
+     */
+    public void restartGame() {
+        stopProcessesAndClearObjects();
+        initializeGameObjects();
+        addObjectsToManager();
+    }
+
+    /**
+     * Ends the game by exiting the program.
+     */
+    public void endGame() {
+        System.exit(0);
+    }
+
+    /**
+     * Initializes game objects.
      */
     private void initializeGameObjects() {
         this.manazer = new Manazer();
         manazer.spravujObjekt(this);
-
-
-        this.map = new Map(0, 720);
-        this.map2 = new Map(1620, 720);
         this.bot = new TransBot(20, 480);
+        this.map = new Map(0, 800);
+        this.map2 = new Map(1620, 800);
         this.score = new Score();
         this.gameInfo = new GameInfo(this.score, this.bot.getHealth(), this.bot);
         this.enemySpawner = new EnemySpawner(manazer, this.bot, this.score);
@@ -59,28 +83,12 @@ public class Game {
                 this.bot,
                 this.score
         );
-
-        this.isRunning = false;
-        this.gameMenu = new GameMenu();
-    }
-
-
-
-    /**
-     * Metóda zapne hru ak ešte nebola spustená.
-     */
-    public void startGame() {
-        if (!this.isRunning) {
-            addGameObjectsToManager();
-            hideStartScreen();
-            this.isRunning = true;
-        }
     }
 
     /**
-     * Metóda pridá herné objekty do manazéra.
+     * Adds game objects to the manager.
      */
-    private void addGameObjectsToManager() {
+    private void addObjectsToManager() {
         manazer.spravujObjekt(this.map);
         manazer.spravujObjekt(this.map2);
         manazer.spravujObjekt(this.bot);
@@ -90,27 +98,9 @@ public class Game {
     }
 
     /**
-     * Metóda skryje štartovací screen.
+     * Stops running processes, clears game objects, and resets variables.
      */
-    private void hideStartScreen() {
-        this.gameMenu.hideMenu();
-    }
-
-    /**
-     * Metóda reštartuje hru.
-     */
-    public void restartGame() {
-        stopRunningProcesses();
-        clearGameObjects();
-        reinitializeGameObjects();
-        addGameObjectsToManager();
-        this.isRunning = false;
-    }
-
-    /**
-     * Metóda zastaví všetky procesy tým, že prestane spravovať herné objekty a skryje ich.
-     */
-    private void stopRunningProcesses() {
+    private void stopProcessesAndClearObjects() {
         manazer.prestanSpravovatObjekt(this.map);
         manazer.prestanSpravovatObjekt(this.map2);
         manazer.prestanSpravovatObjekt(this.bot);
@@ -119,12 +109,6 @@ public class Game {
         manazer.prestanSpravovatObjekt(this.gameInfo);
         this.bot.hideImage();
         this.gameInfo.hideInfo();
-    }
-
-    /**
-     * Metóda vymaže herné objekty z pamäte.
-     */
-    private void clearGameObjects() {
         this.bot = null;
         this.map = null;
         this.map2 = null;
@@ -132,19 +116,5 @@ public class Game {
         this.gameInfo = null;
         this.enemySpawner = null;
         this.collisionDetectSystem = null;
-    }
-
-    /**
-     * Metóda reštartuje herné objekty.
-     */
-    private void reinitializeGameObjects() {
-        initializeGameObjects();
-    }
-
-    /**
-     * Metóda ukončí hru.
-     */
-    public void endGame() {
-        System.exit(0);
     }
 }
