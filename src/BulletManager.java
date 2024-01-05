@@ -154,7 +154,7 @@ public class BulletManager {
         for (Bullet bullet : this.bullets) {
             if (this.detectBullet(bullet, 1450, 900) ) {
                 bulletsToRemove.add(bullet);
-                bullet.skryObrazok();
+                bullet.hideImage();
                 manazer.prestanSpravovatObjekt(bullet);
             }
         }
@@ -179,6 +179,7 @@ public class BulletManager {
      * Metóda zmení bulletType na ďalší typ.
      */
     public void changeBulletType() {
+        //toto nie je môj kód, ale kód z internetu
         this.bulletType = BulletType.values()[this.bulletType.ordinal() + 1];
         if (this.bulletType.ordinal() > 4) {
             this.bulletType = BulletType.NORMAL;

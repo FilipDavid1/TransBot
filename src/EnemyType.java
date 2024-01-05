@@ -12,7 +12,6 @@ public enum EnemyType {
     ASCULE,
     BIFLER,
     BOASITE,
-    BOSS,
     ELBLINK,
     GEALMEA,
     GELPAAR,
@@ -35,8 +34,6 @@ public enum EnemyType {
                 return "bifler";
             case BOASITE:
                 return "boasite";
-            case BOSS:
-                return "boss";
             case ELBLINK:
                 return "elblink";
             case GEALMEA:
@@ -54,6 +51,10 @@ public enum EnemyType {
         }
     }
 
+    /**
+     * Metóda vráti náhodný typ nepriateľa.
+     * @return náhodný typ nepriateľa
+     */
     public static EnemyType getRandomEnemyType() {
         Random random = new Random();
         int randomNumber = random.nextInt(11);

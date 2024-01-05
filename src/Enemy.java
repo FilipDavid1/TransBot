@@ -57,7 +57,6 @@ public class Enemy {
         Random random = new Random();
         this.randomNumber = random.nextInt(800) + 1;
         this.angle = 0;
-        //this.bulletManager = new BulletManager();
         this.bot = bot;
         this.hasReachedBot = false;
         this.health = 3;
@@ -376,7 +375,7 @@ public class Enemy {
     /**
      * Metóda skryje obrázok nepriateľa.
      */
-    public void skryObrazok() {
+    public void hideImage() {
         this.enemyImg.skry();
     }
 

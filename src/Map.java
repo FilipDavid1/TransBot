@@ -30,11 +30,11 @@ public class Map {
      * Ak je x menšie ako -1620 tak sa x nastaví na 1610.
      */
     public void tik() {
-        if (this.x > -1620) { //polovica obrazka - 10  1620 × 242
+        if (this.x > -1620) {
             this.x -= 10;
             this.mapaImg.posunVodorovne(-10);
         } else {
-            this.x = 1610; // sirka obrazka + polovica obrazka
+            this.x = 1610;
             this.mapaImg.zmenPolohu(this.x, this.y);
         }
     }

@@ -178,20 +178,20 @@ public class EnemySpawner {
                 if (enemy.getX() <= 0 && enemy.getHasReachedBot()) {
                     enemy.setIsDead(true);
                     enemiesToDelete.add(enemy);
-                    enemy.skryObrazok();
+                    enemy.hideImage();
                 }
 
             } else if (enemy.getType() == EnemyType.PSYBALL) {
                 if (enemy.getX() >= 1400  && enemy.getHasReachedBot()) {
                     enemy.setIsDead(true);
                     enemiesToDelete.add(enemy);
-                    enemy.skryObrazok();
+                    enemy.hideImage();
                 }
             } else {
                 if (enemy.getX() <= 0) {
                     enemy.setIsDead(true);
                     enemiesToDelete.add(enemy);
-                    enemy.skryObrazok();
+                    enemy.hideImage();
                 }
             }
 

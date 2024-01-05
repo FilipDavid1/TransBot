@@ -11,7 +11,6 @@ import fri.shapesge.Manazer;
  */
 public class Game {
     private static Game instance;
-
     private TransBot bot;
     private EnemySpawner enemySpawner;
     private Map map;

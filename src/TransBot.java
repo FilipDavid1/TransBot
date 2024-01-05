@@ -42,7 +42,6 @@ public class TransBot {
         this.imageHeight = dataObrazku.getVyska();
         this.imageWidth = dataObrazku.getSirka();
         this.health = new Health();
-
     }
 
 
@@ -86,7 +85,6 @@ public class TransBot {
             this.x = 1320;
         }
         
-        
         this.transBotImg.zmenPolohu(this.x, this.y);
     }
 
@@ -94,6 +92,7 @@ public class TransBot {
      * Metóda updatne obrázok transbota podľa toho aký bulletType má.
      */
     private void changeBulletType() {
+        //toto nie je môj kód, ale kód z internetu
         this.bulletType = BulletType.values()[this.bulletType.ordinal() + 1];
         if (this.bulletType.ordinal() > 4) {
             this.bulletType = BulletType.NORMAL;

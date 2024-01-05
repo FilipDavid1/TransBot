@@ -14,8 +14,4 @@ public enum BulletType {
     DIFFUSION_BEAM,
     ENEMY_BULLET;
 
-
-    public BulletType getRandomBulletType() {
-        return values()[(int)(Math.random() * values().length)];
-    }
 }

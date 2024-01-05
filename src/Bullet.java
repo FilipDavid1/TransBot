@@ -28,8 +28,8 @@ public class Bullet {
      */
     public Bullet(int x, int y, BulletType bulletType, BulletDirection bulletDirection) {
         this.bulletType = bulletType;
-        this.nabojImg = new Obrazok("../pics/amo/" + this.getNazovNaboja() + ".png");
-        DataObrazku image = new DataObrazku("../pics/amo/" + this.getNazovNaboja() + ".png");
+        this.nabojImg = new Obrazok("../pics/amo/" + this.getBulletName() + ".png");
+        DataObrazku image = new DataObrazku("../pics/amo/" + this.getBulletName() + ".png");
         this.imageHeight = image.getVyska();
         this.imageWidth = image.getSirka();
         this.x = x;
@@ -130,7 +130,7 @@ public class Bullet {
     /**
      * Metóda skryje obrázok náboja.
      */
-    public void skryObrazok() {
+    public void hideImage() {
         this.nabojImg.skry();
     }
 
@@ -138,7 +138,7 @@ public class Bullet {
      * Metóda vráti názov obrázku náboja.
      * @return názov obrázku náboja
      */
-    public String getNazovNaboja() {
+    public String getBulletName() {
         switch (this.bulletType) {
             case CANNON:
                 return "cannon";

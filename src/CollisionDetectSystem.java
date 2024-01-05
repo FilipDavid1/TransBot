@@ -43,14 +43,14 @@ public class CollisionDetectSystem {
                 for (Bullet bullet : enemy.getBulletManager().getBullets()) {
                     if (this.detectCollision(transBot, bullet)) {
                         bulletsToRemove.add(bullet);
-                        bullet.skryObrazok();
+                        bullet.hideImage();
                         this.transBot.getHealth().decreaseHealth();
                     }
                 }
             }
             if (this.detectCollision(enemy, this.transBot)) {
                 enemiesToRemove.add(enemy);
-                enemy.skryObrazok();
+                enemy.hideImage();
                 this.transBot.getHealth().decreaseHealth();
             }
             for (Bullet bullet : this.bullets) {
@@ -60,29 +60,29 @@ public class CollisionDetectSystem {
                         //if enemy health is 1, remove her
                         if (enemy.getHealth() == 1) {
                             enemiesToRemove.add(enemy);
-                            enemy.skryObrazok();
+                            enemy.hideImage();
                             bulletsToRemove.add(bullet);
-                            bullet.skryObrazok();
+                            bullet.hideImage();
                             this.score.increaseScore();
                         } else {
                             enemy.setHealth(enemy.getHealth() - 1);
                             enemy.setX(enemy.getX() + 100);
                             bulletsToRemove.add(bullet);
-                            bullet.skryObrazok();
+                            bullet.hideImage();
 
                         }
 
                     } else if (bullet.getBulletType() == BulletType.DIFFUSION_BEAM) {
                         enemy.setIsDead(true);
                         enemiesToRemove.add(enemy);
-                        enemy.skryObrazok();
+                        enemy.hideImage();
                         this.score.increaseScore();
                     } else {
                         enemy.setIsDead(true);
                         enemiesToRemove.add(enemy);
                         bulletsToRemove.add(bullet);
-                        bullet.skryObrazok();
-                        enemy.skryObrazok();
+                        bullet.hideImage();
+                        enemy.hideImage();
                         this.score.increaseScore();
                     }
                 }

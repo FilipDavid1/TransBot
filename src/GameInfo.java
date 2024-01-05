@@ -46,6 +46,9 @@ public class GameInfo {
 
     }
 
+    /**
+     * Metóda skryje score, health a bulletType.
+     */
     public void hideInfo() {
         this.scoreText.skry();
         this.healthText.skry();
