@@ -1,13 +1,13 @@
 import fri.shapesge.Manazer;
 
 /**
- * The Game class creates game objects and adds them to the manager. It also handles game termination.
+ * Trieda Game vytvára objekt hry, taktiež obsahuje metódy na spustenie, reštartovanie a ukončenie hry.
+ * Trieda je implementovaná ako Singleton.
  *
  * @author Filip Dávid
  * @version 1.0
  */
 public class Game {
-
     private static Game instance = null;
 
     private Manazer manazer;
@@ -23,7 +23,7 @@ public class Game {
     private boolean isRunning;
 
     /**
-     * Private constructor to initialize game objects and add them to the manager.
+     * Privátny konštruktor nastaví premennú isRunning na false a vytvorí objekt GameMenu.
      */
     private Game() {
         initializeGameObjects();
@@ -31,6 +31,10 @@ public class Game {
         this.gameMenu = new GameMenu();
     }
 
+    /**
+     * Vráti inštanciu triedy Game.
+     * @return instance
+     */
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
@@ -39,7 +43,7 @@ public class Game {
     }
 
     /**
-     * Starts the game by adding objects to the manager and hiding the menu.
+     * Spustí hru tým, že zobrazí objekty a skryje menu.
      */
     public void startGame() {
         if (!this.isRunning) {
@@ -50,7 +54,7 @@ public class Game {
     }
 
     /**
-     * Restarts the game by stopping processes, clearing objects, and reinitializing.
+     * Reštartuje hru tým, že zastaví bežiace procesy, vymaže objekty a reštartuje premenné.
      */
     public void restartGame() {
         stopProcessesAndClearObjects();
@@ -59,14 +63,14 @@ public class Game {
     }
 
     /**
-     * Ends the game by exiting the program.
+     * Ukončí hru tým, že ukončí program.
      */
     public void endGame() {
         System.exit(0);
     }
 
     /**
-     * Initializes game objects.
+     * Metóda inicializuje herné objekty.
      */
     private void initializeGameObjects() {
         this.manazer = new Manazer();
@@ -86,7 +90,7 @@ public class Game {
     }
 
     /**
-     * Adds game objects to the manager.
+     * Metóda pridá herné objekty do manazéra.
      */
     private void addObjectsToManager() {
         manazer.spravujObjekt(this.map);
@@ -98,7 +102,7 @@ public class Game {
     }
 
     /**
-     * Stops running processes, clears game objects, and resets variables.
+     * Metóda zastaví bežiace procesy a vymaže herné objekty.
      */
     private void stopProcessesAndClearObjects() {
         manazer.prestanSpravovatObjekt(this.map);
