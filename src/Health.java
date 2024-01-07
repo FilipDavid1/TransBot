@@ -33,9 +33,14 @@ public class Health {
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.WARNING_MESSAGE,
                     null,
-                    new String[]{"Exit"},
+                    new String[]{"Restart", "Exit"},
                     "Exit");
+
             if (choice == 0) {
+                // Restart the game
+                Game.getInstance().restartGame();
+            } else {
+                // Exit the game
                 JOptionPane.showMessageDialog(null, "Exiting the game!");
                 System.exit(0);
             }
