@@ -20,7 +20,7 @@ public class Health {
 
     /**
      * Metóda zníži health o 10.
-     * Ak je health menší alebo rovný 0 tak sa health nastaví na 0 a zobrazí sa hlásenie o konci hry.
+     * Ak je health menší alebo rovný 0 tak sa health nastaví na 0 a zobrazí sa okno s možnosťami Restart a Exit.
      */
     public void decreaseHealth() {
         this.health -= 10;
@@ -37,11 +37,9 @@ public class Health {
                     "Exit");
 
             if (choice == 0) {
-                // Restart the game
                 Game.getInstance().restartGame();
             } else {
-                // Exit the game
-                JOptionPane.showMessageDialog(null, "Exiting the game!");
+                JOptionPane.showMessageDialog(null, "Are you sure you want to exit?");
                 System.exit(0);
             }
         }
