@@ -202,4 +202,9 @@ public class BulletManager {
     public BulletType getBulletType() {
         return this.bulletType;
     }
+
+    public String getBulletName() {
+        return this.bulletType.getBulletName();
+    }
+
 }

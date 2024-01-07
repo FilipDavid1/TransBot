@@ -1,4 +1,5 @@
 import fri.shapesge.BlokTextu;
+import fri.shapesge.Obrazok;
 import fri.shapesge.StylFontu;
 
 /**
@@ -21,6 +22,8 @@ public class GameInfo {
 
     private TransBot transBot;
 
+    private Obrazok bulletTypeImg;
+
     /**
      * Konštruktor vytvorí objekt GameInfo v ktorom sa zobrazuje score, health a bulletType.
      * @param score
@@ -40,9 +43,14 @@ public class GameInfo {
         this.healthText.zmenFont("Helvetica", StylFontu.PLAIN, 20);
         this.healthText.zobraz();
 
+        this.bulletTypeImg = new Obrazok(this.transBot.getBulletImg());
+        this.bulletTypeImg.zmenPolohu(1320, 10);
+        this.bulletTypeImg.zobraz();
+
         this.bulletTypeText = new BlokTextu("Bullet Type: " + this.transBot.getBulletType(), 1200, 30);
         this.bulletTypeText.zmenFont("Helvetica", StylFontu.PLAIN, 20);
         this.bulletTypeText.zobraz();
+
 
     }
 
@@ -61,12 +69,9 @@ public class GameInfo {
     public void tik() {
         this.scoreText.zmenText("Score: " + this.score.getScore());
         this.healthText.zmenText("Health: " + this.health.getHealth());
-        if (this.transBot.getBulletType() == BulletType.DIFFUSION_BEAM) {
-        //move bulletTypeText to the left
-            this.bulletTypeText.zmenPolohu(1100, 30);
-        } else {
-            this.bulletTypeText.zmenPolohu(1200, 30);
-        }
-        this.bulletTypeText.zmenText("Bullet Type: " + this.transBot.getBulletType());
+
+        this.bulletTypeText.zmenText("Bullet Type:          " +  this.transBot.getTime());
+        this.bulletTypeImg.zmenObrazok(this.transBot.getBulletImg());
+
     }
 }

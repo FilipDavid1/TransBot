@@ -23,4 +23,20 @@ public enum BulletType {
         //random bullet type without enemy bullet
         return values()[(int)(Math.random() * (values().length - 1))];
     }
+
+    //get bullet name
+    public String getBulletName() {
+        switch (this) {
+            case CANNON:
+                return "cannon";
+            case BEAM:
+                return "beam";
+            case SWORD_FIRE:
+                return "sword_fire";
+            case DIFFUSION_BEAM:
+                return "diffusion_beam";
+            default:
+                return "normal";
+        }
+    }
 }

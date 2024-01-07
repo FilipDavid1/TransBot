@@ -247,4 +247,11 @@ public class TransBot {
         this.transBotImg.skry();
     }
 
+    public int getTime() {
+        return this.time / 20;
+    }
+
+    public String getBulletImg() {
+        return "src/pics/amo/" + this.bulletManager.getBulletName() + "_icon.png";
+    }
 }
