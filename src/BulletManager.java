@@ -44,7 +44,11 @@ public class BulletManager {
      * @param y
      */
     public void shoot(int x, int y) {
-        if (this.bullets.size() < 10) {
+        if (this.bullets.size() < 10 && this.bulletType != BulletType.DIFFUSION_BEAM) {
+            Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
+            this.manazer.spravujObjekt(bullet);
+            this.bullets.add(bullet);
+        } else if (this.bullets.size() < 3 && this.bulletType == BulletType.DIFFUSION_BEAM) {
             Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
             this.manazer.spravujObjekt(bullet);
             this.bullets.add(bullet);
@@ -85,7 +89,7 @@ public class BulletManager {
      * @param y
      */
     public void shoot2Directions(int x, int y) {
-        if (this.bullets.size() < 10) {
+        if (this.bullets.size() < 5) {
             Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
             this.manazer.spravujObjekt(bullet);
             this.bullets.add(bullet);
@@ -131,7 +135,7 @@ public class BulletManager {
      * @param y
      */
     public void shoot3Directions(int x, int y) {
-        if (this.bullets.size() < 10) {
+        if (this.bullets.size() < 5) {
             Bullet bullet = new Bullet(x, y, this.bulletType, BulletDirection.RIGHT);
             this.manazer.spravujObjekt(bullet);
             this.bullets.add(bullet);
