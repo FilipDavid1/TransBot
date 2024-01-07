@@ -15,16 +15,16 @@ public class Bullet {
 
     private final int imageWidth;
     private final int imageHeight;
-    private BulletType bulletType;
+    private final BulletType bulletType;
 
-    private BulletDirection bulletDirection;
+    private final BulletDirection bulletDirection;
 
     /**
      * Konštruktor nastaví atribúty na vstupné parametre a zmení pozíciu obrázku na x a y a zobrazí ho.
-     * @param x
-     * @param y
-     * @param bulletType
-     * @param bulletDirection
+     * @param x súradnica x
+     * @param y súradnica y
+     * @param bulletType typ náboja
+     * @param bulletDirection smer náboja
      */
     public Bullet(int x, int y, BulletType bulletType, BulletDirection bulletDirection) {
         this.bulletType = bulletType;

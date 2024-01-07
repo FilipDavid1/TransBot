@@ -10,25 +10,25 @@ import fri.shapesge.StylFontu;
  * @version 1.0
  */
 public class GameInfo {
-    private Score score;
+    private final Score score;
 
-    private Health health;
+    private final Health health;
 
-    private BlokTextu scoreText;
+    private final BlokTextu scoreText;
 
-    private BlokTextu healthText;
+    private final BlokTextu healthText;
 
-    private BlokTextu bulletTypeText;
+    private final BlokTextu bulletTypeText;
 
-    private TransBot transBot;
+    private final TransBot transBot;
 
-    private Obrazok bulletTypeImg;
+    private final Obrazok bulletTypeImg;
 
     /**
      * Konštruktor vytvorí objekt GameInfo v ktorom sa zobrazuje score, health a bulletType.
-     * @param score
-     * @param health
-     * @param transBot
+     * @param score skóre
+     * @param health životy
+     * @param transBot transbot
      */
     public GameInfo(Score score, Health health, TransBot transBot) {
         this.score = score;

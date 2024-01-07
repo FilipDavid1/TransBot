@@ -10,12 +10,12 @@ import fri.shapesge.Obrazok;
 public class Map {
     private final Obrazok mapaImg;
     private int x;
-    private int y;
+    private final int y;
 
     /**
      * Konštruktor vytvorí obrazok mapy a zobrazí ho na súradniciach x a y.
-     * @param x
-     * @param y
+     * @param x súradnica x
+     * @param y súradnica y
      */
     public Map(int x, int y) {
         this.x = x;

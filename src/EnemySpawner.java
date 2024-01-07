@@ -19,14 +19,14 @@ public class EnemySpawner {
 
     private final TransBot bot;
 
-    private Score score;
+    private final Score score;
 
 
     /**
      * Konštruktor nastaví enemies na prázdny ArrayList, time na 80 a nastaví ostatné atribúty na vstupné parametre.
-     * @param manazer
-     * @param bot
-     * @param score
+     * @param manazer spravuje objekt EnemySpawner
+     * @param bot TransBot
+     * @param score skóre
      */
     public EnemySpawner(Manazer manazer, TransBot bot, Score score) {
         this.enemies = new ArrayList<>();
@@ -39,8 +39,8 @@ public class EnemySpawner {
 
     /**
      * Metóda spawnuje nepriateľov typu Psyball alebo Ascule tak, že spawnuje 5 nepriateľov v rade s 100px rozostupom.
-     * @param enemyType
-     * @param x
+     * @param enemyType typ nepriateľa
+     * @param x súradnica x
      */
     private void spawnPsyball( EnemyType enemyType, int x) {
         int initialX = x;
@@ -133,9 +133,9 @@ public class EnemySpawner {
 
     /**
      * Metóda spawnuje nepriateľa na zadaných súradniciach.
-     * @param enemyType
-     * @param x
-     * @param y
+     * @param enemyType typ nepriateľa
+     * @param x súradnica x
+     * @param y súradnica y
      */
     private void spawnEnemy(EnemyType enemyType, int x, int y) {
         Enemy enemy = new Enemy(x, y, enemyType, this.bot);

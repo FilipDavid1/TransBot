@@ -18,7 +18,7 @@ public class Game {
     private CollisionDetectSystem collisionDetectSystem;
     private Score score;
     private GameInfo gameInfo;
-    private GameMenu gameMenu;
+    private final GameMenu gameMenu;
 
     private boolean isRunning;
 

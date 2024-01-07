@@ -19,9 +19,9 @@ public class Enemy {
     private final int imageHeight;
     private boolean movingDown;
 
-    private EnemyType type;
+    private final EnemyType type;
 
-    private int randomNumber;
+    private final int randomNumber;
 
     private int angle;
 
@@ -39,9 +39,9 @@ public class Enemy {
 
     /**
      * Konštruktor vytvorí nepriateľa na súradniciach x a y a nastaví mu typ, taktiež nastaví ostatné atribúty.
-     * @param x
-     * @param y
-     * @param type
+     * @param x súradnica x
+     * @param y súradnica y
+     * @param type typ nepriateľa
      */
     public Enemy(int x, int y, EnemyType type, TransBot bot) {
         this.type = type;
@@ -420,7 +420,7 @@ public class Enemy {
 
     /**
      * Metóda nastaí isDead.
-     * @param isDead
+     * @param isDead boolean ktorý nastaví isDead
      */
     public void setIsDead(boolean isDead) {
         this.isDead = isDead;

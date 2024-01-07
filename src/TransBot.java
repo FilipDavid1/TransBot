@@ -25,7 +25,7 @@ public class TransBot {
 
     private DataObrazku dataObrazku;
 
-    private Health health;
+    private final Health health;
 
     private int time;
 
@@ -177,7 +177,7 @@ public class TransBot {
 
     /**
      * Metóda nastaví velX na zadanú hodnotu.
-     * @param velX
+     * @param velX rýchlosť
      */
     private void setVelX(int velX) {
         this.velX = velX;
@@ -185,7 +185,7 @@ public class TransBot {
 
     /**
      * Metóda nastaví velY na zadanú hodnotu.
-     * @param velY
+     * @param velY rýchlosť
      */
     private void setVelY(int velY) {
         this.velY = velY;

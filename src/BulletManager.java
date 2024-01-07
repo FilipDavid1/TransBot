@@ -13,14 +13,14 @@ import fri.shapesge.Manazer;
  */
 public class BulletManager {
     private final ArrayList<Bullet> bullets;
-    private Manazer manazer;
+    private final Manazer manazer;
 
     private BulletType bulletType;
 
     /**
      * Konštruktor nastaví bullets na prázdny ArrayList, manazer na nový Manazer a bulletType na vstupný parameter.
      * Manazer spravuje objekt BulletManager.
-     * @param bulletType
+     * @param bulletType typ náboja
      */
     public BulletManager(BulletType bulletType) {
         this.bullets = new ArrayList<>();
@@ -40,8 +40,8 @@ public class BulletManager {
      * Metóda zavolá metódu vystrelí náboj na zadanej pozícii x a y.
      * Náboj sa pridá do ArrayListu bullets a manazer spravuje objekt náboja.
      * Ak je veľkosť ArrayListu bullets väčšia ako 10, tak sa náboj nevystrelí.
-     * @param x
-     * @param y
+     * @param x súradnica x
+     * @param y súradnica y
      */
     public void shoot(int x, int y) {
         if (this.bullets.size() < 10 && this.bulletType != BulletType.DIFFUSION_BEAM) {
@@ -57,8 +57,8 @@ public class BulletManager {
 
     /**
      * Metóda vystrelí náboj na pozícii x a y a zároveň vystrelí náboj na pozícii x + 150 a y.
-     * @param x
-     * @param y
+     * @param x súradnica x
+     * @param y súradnica y
      */
     public void burst(int x, int y) {
         this.shoot(x, y);
@@ -69,8 +69,8 @@ public class BulletManager {
      * Metóda vystrelí náboj smerom nadol na pozícii x a y.
      * Zároveň zmení uhol náboja na 90 stupňov.
      * Ak je veľkosť ArrayListu bullets väčšia ako 10, tak sa náboj nevystrelí.
-     * @param x
-     * @param y
+     * @param x súradnica x
+     * @param y súradnica y
      */
     public void shootDown(int x, int y) {
         if (this.bullets.size() < 10) {
@@ -85,8 +85,8 @@ public class BulletManager {
      * Metóda vystrelí dva náboje smerom doprava a doľava na pozícii x a y.
      * Zároveň zmení uhol druhého náboja na 180 stupňov.
      * Ak je veľkosť ArrayListu bullets väčšia ako 10, tak sa náboj nevystrelí.
-     * @param x
-     * @param y
+     * @param x súradnica x
+     * @param y súradnica y
      */
     public void shoot2Directions(int x, int y) {
         if (this.bullets.size() < 5) {
@@ -104,8 +104,8 @@ public class BulletManager {
      * Metóda vystrelí štyri náboje a to smerom dole, hore, doľava, doprava na pozícií x a y.
      * Náboje sa otočia podľa ich smeru.
      * Ak je veľkosť ArrayListu bullets väčšia ako 10, tak sa náboj nevystrelí.
-     * @param x
-     * @param y
+     * @param x súradnica x
+     * @param y súradnica y
      */
     public void shoot4Directions(int x, int y) {
         if (this.bullets.size() < 10) {
@@ -131,8 +131,8 @@ public class BulletManager {
      * Metóda vystrelí tri náboje a to smerom doprava, doprava hore a doprava dole na pozícií x a y.
      * Náboje sa otočia podľa ich smeru.
      * Ak je veľkosť ArrayListu bullets väčšia ako 10, tak sa náboj nevystrelí.
-     * @param x
-     * @param y
+     * @param x súradnica x
+     * @param y súradnica y
      */
     public void shoot3Directions(int x, int y) {
         if (this.bullets.size() < 5) {
@@ -167,9 +167,9 @@ public class BulletManager {
 
     /**
      * Metóda detekuje či náboj je mimo obrazovky.
-     * @param bullet
-     * @param x
-     * @param y
+     * @param bullet náboj
+     * @param x súradnica x
+     * @param y súradnica y
      * @return true ak je náboj mimo obrazovky, inak false
      */
     private boolean detectBullet(Bullet bullet, int x, int y) {

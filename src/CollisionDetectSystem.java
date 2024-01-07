@@ -11,19 +11,19 @@ import java.util.ArrayList;
  */
 public class CollisionDetectSystem {
 
-    private ArrayList<Enemy> enemies;
-    private ArrayList<Bullet> bullets;
+    private final ArrayList<Enemy> enemies;
+    private final ArrayList<Bullet> bullets;
 
-    private TransBot transBot;
+    private final TransBot transBot;
 
-    private Score score;
+    private final Score score;
 
     /**
      * Konštruktor nastaví vstupné parametre na atribúty.
-     * @param enemies
-     * @param bullets
-     * @param transBot
-     * @param score
+     * @param enemies arraylist nepriateľov
+     * @param bullets arraylist nábojov
+     * @param transBot transbot
+     * @param score skóre
      */
     public CollisionDetectSystem(ArrayList<Enemy> enemies, ArrayList<Bullet> bullets, TransBot transBot, Score score) {
         this.enemies = enemies;
@@ -101,8 +101,8 @@ public class CollisionDetectSystem {
 
     /**
      * Metóda detekuje kolíziu medzi nepriateľom a nábojom.
-     * @param enemy
-     * @param bullet
+     * @param enemy nepriateľ
+     * @param bullet náboj
      * @return true ak nastala kolízia, inak false
      */
     private boolean detectCollision(Enemy enemy, Bullet bullet) {
@@ -124,8 +124,8 @@ public class CollisionDetectSystem {
 
     /**
      * Metóda detekuje kolíziu medzi TransBotom a nábojom.
-     * @param bot
-     * @param bullet
+     * @param bot transbot
+     * @param bullet náboj
      * @return true ak nastala kolízia, inak false
      */
     private boolean detectCollision(TransBot bot, Bullet bullet) {
@@ -148,8 +148,8 @@ public class CollisionDetectSystem {
 
     /**
      * Metóda detekuje kolíziu medzi nepriateľom a TransBotom.
-     * @param enemy
-     * @param transBot
+     * @param enemy nepriateľ
+     * @param transBot transbot
      * @return true ak nastala kolízia, inak false
      */
     private boolean detectCollision(Enemy enemy, TransBot transBot) {
