@@ -203,6 +203,10 @@ public class BulletManager {
         return this.bulletType;
     }
 
+    /**
+     * Metóda vráti názov obrázku náboja.
+     * @return názov obrázku náboja
+     */
     public String getBulletName() {
         return this.bulletType.getBulletName();
     }

@@ -247,10 +247,18 @@ public class TransBot {
         this.transBotImg.skry();
     }
 
+    /**
+     * Metóda vráti čas do ďalšieho zmenenia bulletType.
+     * @return time / 20
+     */
     public int getTime() {
         return this.time / 20;
     }
 
+    /**
+     * Metóda vráti názov obrázku náboja.
+     * @return názov obrázku náboja
+     */
     public String getBulletImg() {
         return "src/pics/amo/" + this.bulletManager.getBulletName() + "_icon.png";
     }

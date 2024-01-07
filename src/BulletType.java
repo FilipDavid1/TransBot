@@ -24,7 +24,10 @@ public enum BulletType {
         return values()[(int)(Math.random() * (values().length - 1))];
     }
 
-    //get bullet name
+    /**
+     * Metóda vráti názov obrázku náboja.
+     * @return názov obrázku náboja
+     */
     public String getBulletName() {
         switch (this) {
             case CANNON:
