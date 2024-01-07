@@ -182,12 +182,9 @@ public class BulletManager {
     /**
      * Metóda zmení bulletType na ďalší typ.
      */
-    public void changeBulletType() {
+    public void changeBulletType(BulletType bulletType) {
         //toto nie je môj kód, ale kód z internetu
-        this.bulletType = BulletType.values()[this.bulletType.ordinal() + 1];
-        if (this.bulletType.ordinal() > 4) {
-            this.bulletType = BulletType.NORMAL;
-        }
+        this.bulletType = bulletType;
     }
 
     /**

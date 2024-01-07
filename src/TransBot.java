@@ -27,6 +27,8 @@ public class TransBot {
 
     private Health health;
 
+    private int time;
+
     /**
      * Konštruktor vytvorí objekt transbota na súradniciach x a y.
      */
@@ -42,6 +44,7 @@ public class TransBot {
         this.imageHeight = dataObrazku.getVyska();
         this.imageWidth = dataObrazku.getSirka();
         this.health = new Health();
+        this.time = 500;
     }
 
 
@@ -70,6 +73,12 @@ public class TransBot {
      * Metóda mení polohu transbota podľa toho či sa pohol.
      */
     public void tik() {
+        if (this.time == 0) {
+            this.changeBullet();
+            this.time = 500;
+        } else {
+            this.time--;
+        }
         this.x += this.velX;
         this.y += this.velY;
 
@@ -86,18 +95,6 @@ public class TransBot {
         }
         
         this.transBotImg.zmenPolohu(this.x, this.y);
-    }
-
-    /**
-     * Metóda updatne obrázok transbota podľa toho aký bulletType má.
-     */
-    private void changeBulletType() {
-        //toto nie je môj kód, ale kód z internetu
-        this.bulletType = BulletType.values()[this.bulletType.ordinal() + 1];
-        if (this.bulletType.ordinal() > 4) {
-            this.bulletType = BulletType.NORMAL;
-        }
-        this.updateTransBotImg();
     }
 
     /**
@@ -149,8 +146,9 @@ public class TransBot {
      * Metoda zavolá metódu changeBullet z bulletManagera a zavolá metódu changeBulletType čím zmení bulletType.
      */
     public void changeBullet() {
-        this.bulletManager.changeBulletType();
-        this.changeBulletType();
+        this.bulletType = BulletType.getRandomBulletType();
+        this.updateTransBotImg();
+        this.bulletManager.changeBulletType(this.bulletType);
     }
 
     /**

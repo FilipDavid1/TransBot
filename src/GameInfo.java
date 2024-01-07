@@ -61,6 +61,12 @@ public class GameInfo {
     public void tik() {
         this.scoreText.zmenText("Score: " + this.score.getScore());
         this.healthText.zmenText("Health: " + this.health.getHealth());
+        if (this.transBot.getBulletType() == BulletType.DIFFUSION_BEAM) {
+        //move bulletTypeText to the left
+            this.bulletTypeText.zmenPolohu(1100, 30);
+        } else {
+            this.bulletTypeText.zmenPolohu(1200, 30);
+        }
         this.bulletTypeText.zmenText("Bullet Type: " + this.transBot.getBulletType());
     }
 }
