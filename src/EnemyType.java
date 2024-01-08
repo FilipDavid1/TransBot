@@ -58,7 +58,6 @@ public enum EnemyType {
     public static EnemyType getRandomEnemyType() {
         Random random = new Random();
         int randomNumber = random.nextInt(11);
-        //without boss
         switch (randomNumber) {
             case 0:
                 return EnemyType.ASCULE;

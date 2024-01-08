@@ -20,7 +20,6 @@ public enum BulletType {
      * @return náhodný bullet type bez enemy bullet
      */
     public static BulletType getRandomBulletType() {
-        //random bullet type without enemy bullet
         return values()[(int)(Math.random() * (values().length - 1))];
     }
 

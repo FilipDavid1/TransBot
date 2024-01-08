@@ -183,7 +183,6 @@ public class BulletManager {
      * Metóda zmení bulletType na ďalší typ.
      */
     public void changeBulletType(BulletType bulletType) {
-        //toto nie je môj kód, ale kód z internetu
         this.bulletType = bulletType;
     }
 

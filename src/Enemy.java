@@ -130,8 +130,6 @@ public class Enemy {
 
         this.enemyImg.posunZvisle((int)(Math.cos(this.x * 0.005) * 11));
         this.y += (int)(Math.cos(this.x * 0.005) * 11);
-
-
     }
 
     /**
@@ -139,8 +137,6 @@ public class Enemy {
      * Elblink sa pohybuje zprava doľava a po dosiahnutí x-ovej súradnice robota sa pohybuje nahor alebo nadol.
      */
     private void elblinkMovement() {
-        //move enemy left the moment this.x is more than this.bot.getX() set hasReachedBot to true and only move down or up depending on this.y
-
         if (this.x > this.bot.getX()) {
             this.enemyImg.posunVodorovne(-10);
             this.x -= 10;
@@ -148,7 +144,6 @@ public class Enemy {
             this.hasReachedBot = true;
         }
 
-        //send enemy one way randomly
         if (this.hasReachedBot) {
             if (this.y < 800 && this.movingDown) {
                 this.enemyImg.posunZvisle(15);
@@ -219,9 +214,6 @@ public class Enemy {
                 this.timer--;
             }
         }
-
-
-
     }
 
     /**
@@ -272,7 +264,6 @@ public class Enemy {
             if (this.y < 700 && this.movingDown) {
                 this.enemyImg.posunZvisle(15);
                 this.y += 15;
-                //rotate image
                 this.enemyImg.zmenUhol(-45);
 
             } else {
@@ -282,7 +273,6 @@ public class Enemy {
             if (this.y >= 100 && !this.movingDown) {
                 this.enemyImg.posunZvisle(-15);
                 this.y -= 15;
-                //rotate image
                 this.enemyImg.zmenUhol(45);
 
             } else {

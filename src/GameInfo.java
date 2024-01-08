@@ -47,7 +47,7 @@ public class GameInfo {
         this.bulletTypeImg.zmenPolohu(1320, 10);
         this.bulletTypeImg.zobraz();
 
-        this.bulletTypeText = new BlokTextu("Bullet Type: " + this.transBot.getBulletType(), 1200, 30);
+        this.bulletTypeText = new BlokTextu("Bullet Type:          ", 1200, 30);
         this.bulletTypeText.zmenFont("Helvetica", StylFontu.PLAIN, 20);
         this.bulletTypeText.zobraz();
 

@@ -83,7 +83,6 @@ public class Bullet {
      * Metóda posúva náboj zvisle o 20px alebo 10px ak je bulletType BEAM.
      */
     private void moveDown() {
-        //if bullet type is beam than move slower
         if (this.bulletType == BulletType.BEAM) {
             this.nabojImg.posunZvisle(10);
             this.y += 10;

@@ -1,5 +1,8 @@
 import fri.shapesge.DataObrazku;
 import fri.shapesge.Obrazok;
+
+import java.io.InputStream;
+
 /**
  * Trieda TransBot vytvára objekt transbota, ktorým hráč ovláda.
  * TransBot sa pohybuje po mape a strieľa na nepriateľov.
@@ -34,6 +37,7 @@ public class TransBot {
      */
     public TransBot(int x, int y) {
         this.transBotImg = new Obrazok("../pics/transBot/transBotJet.png");
+
         this.x = x;
         this.y = y;
         this.transBotImg.zmenPolohu(x, y);
